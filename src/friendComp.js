@@ -1,4 +1,8 @@
-const data = [
+import { dblClick } from '@testing-library/user-event/dist/click';
+import React from 'react'
+import './friendComp.css'
+
+const friend = [
     {
         Name: "Ann",
         ID: '0001'
@@ -35,7 +39,7 @@ function FriendList(props) {
 
 
     return (
-        <li class="text-start m-2" onClick={(e) => checkTimetable(data[i].ID, e)}>{data[i].Name}</li>
+        <li class="text-start m-2" onClick={(e) => checkTimetable(friend[i].ID, e)}>{friend[i].Name}</li>
     )
 }
 
@@ -54,20 +58,44 @@ function SearchFriend(props) {
 
 
 }
+function AddFriend(UserID){
+    //send friend request to user
+    
+}
+function DeleteFriend(UserID){
+    //delete friend from the user database
 
+}
+function FriendColumn(){
+    const friendList = friend.map((friend) => <li key={friend.Name}>{friend.Name}</li>);
+    return(
+        <>
+            <div className="FriendListPanel">
+                <div className="FriendListIcon">
+                </div>
+                <div className='FriendList'>
+                    <h2>Search</h2>
+                    <h2>Friends</h2>
+                    <ul>{friendList}</ul>
+                </div>
+            </div>
+        </>
+    )
+    
+}
 
 function Friend(props) {
-
-
     return (
         <>
+            <FriendColumn />
             <SearchFriend />
-
+            
             <ul>
-                {data.map((list, index) => <FriendList i={index} key={index} />)}
+            {friend.map((list, index) => <FriendList i={index} key={index} />)}
             </ul>
         </>
     )
 }
+
 
 export { Friend }
