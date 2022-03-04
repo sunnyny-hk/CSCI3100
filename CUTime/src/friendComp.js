@@ -58,6 +58,7 @@ function SearchFriend(props) {
 
 
 }
+
 function AddFriend(UserID){
     //send friend request to user
     
@@ -66,8 +67,11 @@ function DeleteFriend(UserID){
     //delete friend from the user database
 
 }
+
 function FriendColumn(){
-    const friendList = friend.map((friend) => <li key={friend.Name}>{friend.Name}</li>);
+    const friendList = friend.map((list, index) => <FriendList i={index} key={index} />);
+    // key is the index of the list, calling the component of FriendList as defined so checkTimetable() could be call
+
     return(
         <>
             <div className="FriendListPanel">
