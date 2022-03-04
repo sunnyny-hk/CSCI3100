@@ -1,2 +1,0 @@
-# CSCI3100
-2022Spring CSCI3100 Project Group G2 
