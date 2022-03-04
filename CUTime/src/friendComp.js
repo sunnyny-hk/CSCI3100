@@ -59,20 +59,20 @@ function SearchFriend(props) {
 
 }
 
-function AddFriend(UserID){
+function AddFriend(UserID) {
     //send friend request to user
-    
+
 }
-function DeleteFriend(UserID){
+function DeleteFriend(UserID) {
     //delete friend from the user database
 
 }
 
-function FriendColumn(){
+function FriendColumn() {
     const friendList = friend.map((list, index) => <FriendList i={index} key={index} />);
     // key is the index of the list, calling the component of FriendList as defined so checkTimetable() could be call
 
-    return(
+    return (
         <>
             <div className="FriendListPanel">
                 <div className="FriendListIcon">
@@ -85,7 +85,7 @@ function FriendColumn(){
             </div>
         </>
     )
-    
+
 }
 
 function Friend(props) {
@@ -93,9 +93,9 @@ function Friend(props) {
         <>
             <FriendColumn />
             <SearchFriend />
-            
+
             <ul>
-            {friend.map((list, index) => <FriendList i={index} key={index} />)}
+                {friend.map((list, index) => <FriendList i={index} key={index} />)}
             </ul>
         </>
     )
