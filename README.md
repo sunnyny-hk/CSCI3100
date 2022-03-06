@@ -4,17 +4,17 @@
 
 For Develop Purpose:
 
-  From GitHub to local repository:
-  $ git remote add <name> <url>
-  $ git pull
+  From GitHub to local repository:  
+  $ git remote add <name> <url>  
+  $ git pull  
 
-  Initialize the package:
-  npm install
+  Initialize the package:  
+  npm install  
   
-  Run the app:
-  npm start
+  Run the app:  
+  npm start  
   
-  To Update File 
-  $ git add .
-  $ git commit -m <comment>
-  $ git push <repository> <branch>
+  To Update File   
+  $ git add .  
+  $ git commit -m <comment>  
+  $ git push <repository> <branch>  
