@@ -1,4 +1,5 @@
 
+from calendar import weekday
 from bs4 import BeautifulSoup
 import logging
 import pandas as pd
@@ -11,7 +12,7 @@ import pandas as pd
 
 #==========================================#
 # Replace with suitable file location and name
-filedir="websrapping\Teaching Timetable.html"
+filedir="csci3100\CSCI3100\webscrapping\Teaching Timetable.html"
 name= "ACCTdata.json"
 #==========================================#
 
@@ -22,8 +23,8 @@ soup = BeautifulSoup(file,"html.parser")
 table = soup.find(id="gv_detail")
 
 #data init
-course_code, class_nbr, cours_title, credit,teaching_staff,class_type,period,venue,date =['' for _ in range(9)]
-data_list=[["course_code"],["class_nbr"],["cours_title"],["credit"],["teaching_staff"],["class_type"],["period"],["venue"],["date"]]
+course_code, class_nbr, cours_title, credit,teaching_staff,class_type,period,venue,date,weekday =['' for _ in range(10)]
+data_list=[["course_code"],["class_nbr"],["cours_title"],["credit"],["teaching_staff"],["class_type"],["period"],["venue"],["date"],["weekday"]]
 
 
 
@@ -38,7 +39,8 @@ for table in table.find_all('tbody'):
             credit = data[3].text
             teaching_staff = data[4].text
             class_type = data[7].text
-            period = data[10].text
+            period = data[10].text[3:]
+            weekday = data[10].text[0:2]
             venue = data[11].text
             date = data[12].text
 
@@ -55,11 +57,13 @@ for table in table.find_all('tbody'):
             data_list[6].append(period)
             data_list[7].append(venue)
             data_list[8].append(date)
+            data_list[9].append(weekday)
 
         except:
             logging.debug("no td item")
 
-
+logging.info("data retrive done")
+print("data retrive done")
 # save to 
 df = pd.DataFrame(data_list)
 df.to_json(name)
