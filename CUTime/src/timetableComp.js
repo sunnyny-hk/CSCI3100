@@ -1,58 +1,82 @@
-import format from "date-fns/format";
-import getDay from "date-fns/getDay";
-import parse from "date-fns/parse";
-import startOfWeek from "date-fns/startOfWeek";
-import React, { useState, forwardRef } from "react";
-import { Calendar, dateFnsLocalizer, Views } from "react-big-calendar";
+import React, { useState, forwardRef, useCallback } from "react";
+import { Calendar, momentLocalizer , Views } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import moment from 'moment'
 
 
+  const localizer = momentLocalizer(moment);
 
-const locales = {
-    "en-US": require("date-fns/locale/en-US")
-  }
+  const defaultView = Views.WEEK;
+  const defaultStartTime = new Date("2022-09-04T08:30:00+08:00");
+  const defaultEndTime = new Date("2022-09-15T20:00:00+08:00");
+  const defaultDate = new Date("2022-09-05")
+  const defaultStep = 30
   
-  const localizer = dateFnsLocalizer({
-    format,
-    parse,
-    startOfWeek,
-    getDay,
-    locales
-  })
-  
-  const defaultView = Views.WEEK
-  
+
+  const color = ['AntiqueWhite','Aqua','Beige','CadetBlue','FloralWhite','HotPink']
   //TODO: Import data from database
-  const events = [
-    {
-      title: "Example",
-      start: new Date("2022-02-01T12:00:00+08:00"),
-      end: new Date("2022-02-01T16:00:00+08:00")
-    },
-    {
-      title: "Example2",
-      start: new Date("2022-02-02T13:00:00+08:00"),
-      end: new Date("2022-02-02T14:00:00+08:00")
-    }
-  ]
-  
-  const exampleEvent =
+  const events = []
+
+  const CSCI2720 =
   {
-    title: "NewExample",
-    start: new Date(2022, 2, 1),
-    end: new Date(2022, 2, 1)
+    title: "CSCI2720",
+    start: new Date("2022-09-05T12:00:00+08:00"),
+    end: new Date("2022-09-05T16:00:00+08:00"),
+    name: "CSCI2720: Building Web Application",
+    venue: "UCC206",
+    lecturer: "Prof xxx",
+    class:"T02",
+    atr: 1
   }
+  
+  
+  const CSCI3100 =
+  {
+    title: "CSCI3100",
+    start: new Date("2022-09-06T12:00:00+08:00"),
+    end: new Date("2022-09-06T16:00:00+08:00"),
+    name: "CSCI2720: Building Web Application",
+    venue: "UCC206",
+    lecturer: "Prof xxx",
+    class:"T02",
+    atr: 2
+  }
+
+function CustomToolbar(){
+  return <span></span>
+}
 
 function TimeTable (props) {
-    const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
+    const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" , name:"", venue:"", lecturer:"",class:"",color:""});
     const [allEvents, setAllEvents] = useState(events);
-  
+
+    const handleSelectEvent =   useCallback((e) => window.alert(`Name: ${e.name}\nVenue: ${e.venue}\nLecturer: ${e.lecturer}\nClass: ${e.class}`),[])
+
+    const onDoubleClickEvent = useCallback((e)=>window.alert('hello'),[])
+    // function onDoubleClickEvent(event){
+    //   window.alert("hello")
+    //   const idx = allEvents.indexOf(event)
+    //   setAllEvents(allEvents.filter((ele,index)=>{return index!==idx}))
+    // }
+
+    function eventPropGetter(event) {
+      var style = {
+        backgroundColor:color[event.atr],
+        color:'black'
+      }
+
+      return {style:style}
+    }
+
+
     function handleAddEvent(eve) {
       console.log("pass through handleAddEvent Fn");
       setAllEvents([...allEvents, eve]);
     }
+
+    
 
 
     return (<>
@@ -76,15 +100,25 @@ function TimeTable (props) {
                 </thead>
                 <tbody>
                     <tr>
-                        <td><a href='#' onClick={() => handleAddEvent(exampleEvent)}>CSCI2720</a></td>
+                        <td><a href='#' onClick={() => handleAddEvent(CSCI2720)}>CSCI2720</a></td>
+                        <td>3cred Lecturer Time</td>
+                       
+                    </tr>
+                    <tr>
+                        <td><a href='#' onClick={() => handleAddEvent(CSCI3100)}>CSCI3100</a></td>
                         <td>3cred Lecturer Time</td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <Calendar localizer={localizer} events={allEvents} startAccessor="start" endAccessor="end" defaultView={defaultView} style={{ height: 500, margin: "50px" }} />
+        <Calendar localizer={localizer} events={allEvents} defaultView={defaultView} defaultDate={defaultDate} style={{ height: 500, margin: "50px"}} 
+        views={{week: true}}  components={{toolbar:CustomToolbar}} min={defaultStartTime} max={defaultEndTime} step={defaultStep} timeslots={2} onSelectEvent={handleSelectEvent} onDoubleClickEvent={onDoubleClickEvent}
+        eventPropGetter={event=>eventPropGetter(event)}/>
     </>);
 }
+
+
+
 
 export{TimeTable};
