@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import "./App.css";
 import { Test ,TimeTable } from './timetableComp';
-import { Search } from './serchComp';
+import { Search } from './searchComp';
 import { GPA } from './gpaComp';
 import { Friend } from './friendComp';
 import React, { useState } from "react";
@@ -40,7 +40,7 @@ function App() {
           <hr />
 
           <Routes>
-            <Route path="/" element={<><Test/><TimeTable/></>}/>
+            <Route path="/" element={<div className="page"><TimeTable/><Search/></div>}/>
             <Route path="/searchbar" element={<Search/>} />
             <Route path="/friend" element={<Friend />} />
             <Route path="/gpa" element={<GPA />} />

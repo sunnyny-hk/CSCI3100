@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+.page{
+  display: flex;
+
+}
+.Timetable{
+  flex: 7;
+}
+
+.Search{
+  flex: 3;
+  margin-top: 50px;
+}

@@ -16,8 +16,9 @@ import { set } from "date-fns";
   const defaultDate = new Date("2022-09-05")
   const defaultStep = 30
   
+  const current_id = '625302342921018308089e68'
 
-  const color = ['AntiqueWhite','Aqua','Beige','CadetBlue','FloralWhite','HotPink']
+  const color = ['AntiqueWhite','Aqua','lavender','CadetBlue','chartreuse','HotPink']
   //TODO: Import data from database
   const events = []
 
@@ -75,16 +76,24 @@ function TimeTable (props) {
 
 
     useEffect(()=>{
+      readEvent();
       eventBus.on('testing', (data)=>{
+        for(let i=0;i<data.length;i++){
+          if(data[i].title=="LEC"){
+          data[i].visible = true;
+          }
+        }
         setListEvents(listEvents=>([...listEvents,data]))
         setAllEvents(allEvents=>([...allEvents,...data.filter(e=>e.visible)]))
+        console.log("normal")
+        console.log(data)
       })
       return(eventBus.remove('testing'))
     },[])
 
 
 
-    const handleSelectEvent =   useCallback((e) => window.alert(`Name: ${e.name}\nVenue: ${e.venue}\nLecturer: ${e.lecturer}\nClass: ${e.class}`),[])
+    const handleSelectEvent =   useCallback((e) => window.alert(`Name: ${e.name}\nVenue: ${e.venue}\nLecturer: ${e.lecturer}\nClass: ${e.type+" "+e.class}`),[])
     const formats = {
       eventTimeRangeFormat: () => { 
         return "";
@@ -105,12 +114,49 @@ function TimeTable (props) {
 
     function readEvent(){
       //TODO: readevent 
-      
+      fetch("/timetableserver?current_id="+current_id).then(
+          response => response.json()
+      ).then(
+          data => {
+              var colour = 0;
+              console.log(data)
+              for(let i=0;i<data.length;i++){
+                data[i].start = new Date(data[i].start);
+                data[i].end = new Date(data[i].end);
+                data[i].visible = true;
+                if(i==0||data[i].title!=data[i-1].title){colour++;}
+                data[i].atr = colour;
+              }
+              setListEvents(listEvents=>([...listEvents,data]))
+              setAllEvents(allEvents=>([...allEvents,...data.filter(e=>e.visible)]))
+              console.log(listEvents)
+
+          }
+      )
       //return(events);
     }
 
     function saveEvent(listEvents){
       //TODO: saveEvent
+      //update the server//
+      console.log(allEvents)
+      const requestOptions = {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json' },
+          body: JSON.stringify({
+              type: "save",
+              current_User: current_id,
+              event: allEvents
+          })
+          //body: JSON.stringify([ancd])
+      }
+      fetch("/timetableserver", requestOptions).then(
+          response => response.json()
+      ).then(
+          data => {
+              //console.log(data)
+          }
+      )
     }
 
 
@@ -192,7 +238,7 @@ function TimeTable (props) {
     }
 
 
-    return (<>
+    return (<div className="Timetable">
 
         {/* <div>
             <table>
@@ -242,7 +288,8 @@ function TimeTable (props) {
             </table>
                           
         </div>
-    </>);
+        <button onClick={()=>saveEvent()}>Save to server</button>
+    </div>);
 }
 
 

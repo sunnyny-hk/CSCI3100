@@ -25,11 +25,9 @@ function Friend(props) {
             data => {
                 setBackendData(data)
                 setFriend(data["friend"])
-                setFriendRequest(data["friendRequest"])
                 setRelatedFriend(data["friend"])
-                console.log(data["friend"])
+                setFriendRequest(data["friendRequest"])
                 console.log(data)
-
             }
         )
     },[])
