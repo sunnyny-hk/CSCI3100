@@ -1,0 +1,48 @@
+.Search {
+    width: 80%;
+    border: 10px;
+    padding: 20px 5px 20px 5px;
+    align-self: baseline;
+    background-color: plum;
+    box-shadow: 1px 0px 7px rgba(0,0,0,0.5); 
+    border-radius: 5%;
+    margin: auto;
+    max-height: 800px;
+    min-height: 100px;
+    font-size: 1.5vw;
+}
+.Search h2{
+    font-size: 4.5vw;
+}
+.Search input{
+    width: 200px;
+
+}
+.CourseTable{
+    overflow: hidden;
+    overflow-y: auto;
+    max-height: 600px;
+    padding-top: 10px;
+}
+.CourseTable table{
+    margin: auto;
+}
+.CourseTable::-webkit-scrollbar{
+    display: none;
+}
+
+.CourseTable td{
+    height: 50px;
+    text-align: center;
+  }
+.Search thead th{
+    width: 150px;
+}
+
+.CourseTable tbody {
+    overflow: hidden;
+    overflow-y: auto;
+}
+.CourseTable tbody tr:hover {
+    background-color: fuchsia;
+}
