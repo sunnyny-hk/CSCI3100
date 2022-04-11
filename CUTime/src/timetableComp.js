@@ -50,19 +50,19 @@ function CustomToolbar(){
 
 
 
-// function Test(props) {
-//   let testButton = ()=>{
-//     eventBus.dispatch('testing',{CSCI3100})
-//     console.log('testing')
-//     };
+function Test(props) {
+  let testButton = ()=>{
+    eventBus.dispatch('testing',CSCI3100)
+    console.log('testing')
+    };
 
-//   return (
-//       <>
-//       <p>hello</p>
-//       <button onClick={testButton}>123</button>
-//       </>
-//   )
-// }
+  return (
+      <>
+      <p>hello</p>
+      <button onClick={testButton}>123</button>
+      </>
+  )
+}
 
 function TimeTable (props) {
     const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" , name:"", venue:"", lecturer:"",class:"",color:""});
@@ -88,18 +88,14 @@ function TimeTable (props) {
 
 
     function handleAddEvent(eve) {
+      
       console.log("pass through handleAddEvent Fn");
       setAllEvents([...allEvents, eve]);
     }
 
     useEffect(()=>{
-      eventBus.on('testing',(data)=>{
-        console.log('on')
-        window.alert(`${data.title}`)
-      })
-      return ()=>{
-        console.log('remove')
-        eventBus.remove('testing')}
+        eventBus.on('testing', (data)=>setAllEvents(allEvents=>([...allEvents,data])))
+        return(eventBus.remove('testing'))
       },[])
 
 
