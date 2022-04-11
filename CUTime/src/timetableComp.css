@@ -1,0 +1,11 @@
+.CourseList{
+    box-sizing: border-box;
+    border-collapse: collapse;
+    width: 40em;
+    text-align:left;
+}
+
+.thead{
+    border-bottom: 1px dashed grey;
+}
+
