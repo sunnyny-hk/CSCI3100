@@ -85,6 +85,11 @@ function TimeTable (props) {
 
 
     const handleSelectEvent =   useCallback((e) => window.alert(`Name: ${e.name}\nVenue: ${e.venue}\nLecturer: ${e.lecturer}\nClass: ${e.class}`),[])
+    const formats = {
+      eventTimeRangeFormat: () => { 
+        return "";
+      },
+    };
 
     function eventPropGetter(event) {
       var style = {
@@ -171,6 +176,10 @@ function TimeTable (props) {
                             <td>{event.venue}</td>
                             <td>{event.lecturer}</td>
                             <td>{event.class}</td>
+                            <td>
+                            {event.start.getHours().toString().padStart(2,'0')}:{event.start.getMinutes().toString().padStart(2, '0')}
+                            -{event.end.getHours().toString().padStart(2, '0')}:{event.end.getMinutes().toString().padStart(2, '0')}
+                            </td>
                             <td><button onClick={()=>handleChangeEvent(i,j)}>on/off</button></td>
                             <td><button onClick={()=>handleChangeColor(i,j)}>change</button></td>
                             </tr>
@@ -209,7 +218,7 @@ function TimeTable (props) {
 
         <Calendar localizer={localizer} events={allEvents} defaultView={defaultView} defaultDate={defaultDate} style={{ height: 500, margin: "50px"}} 
         views={{week: true}}  components={{toolbar:CustomToolbar}} min={defaultStartTime} max={defaultEndTime} step={defaultStep} timeslots={2} onSelectEvent={handleSelectEvent} 
-        eventPropGetter={event=>eventPropGetter(event)} dayLayoutAlgorithm = 'no-overlap'/>
+        eventPropGetter={event=>eventPropGetter(event)} formats={formats} dayLayoutAlgorithm = 'no-overlap'/>
 
         <div>
              <table class ="CourseList">
@@ -219,6 +228,9 @@ function TimeTable (props) {
                             <th>Venue</th>
                             <th>Lecturer</th>
                             <th>Class</th>
+                            <th>Time</th>
+                            <th>Visible</th>
+                            <th>color</th>
                             </tr>
                             </thead>
                             <tbody>
