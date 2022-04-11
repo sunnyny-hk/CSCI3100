@@ -1,10 +1,10 @@
-import React, { useState, forwardRef, useCallback } from "react";
+import React, { useState, forwardRef, useCallback, useEffect } from "react";
 import { Calendar, momentLocalizer , Views } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment'
-
+import eventBus from "./EventBus";
 
   const localizer = momentLocalizer(moment);
 
@@ -19,7 +19,7 @@ import moment from 'moment'
   //TODO: Import data from database
   const events = []
 
-  const CSCI2720 =
+  let CSCI2720 =
   {
     title: "CSCI2720",
     start: new Date("2022-09-05T12:00:00+08:00"),
@@ -32,7 +32,7 @@ import moment from 'moment'
   }
   
   
-  const CSCI3100 =
+  let CSCI3100 =
   {
     title: "CSCI3100",
     start: new Date("2022-09-06T12:00:00+08:00"),
@@ -48,18 +48,32 @@ function CustomToolbar(){
   return <span></span>
 }
 
+
+
+function Test(props) {
+  let testButton = ()=>{
+    eventBus.dispatch('testing',{CSCI3100})
+    console.log('testing')
+    };
+
+  return (
+      <>
+      <p>hello</p>
+      <button onClick={testButton}>123</button>
+      </>
+  )
+}
+
 function TimeTable (props) {
     const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" , name:"", venue:"", lecturer:"",class:"",color:""});
     const [allEvents, setAllEvents] = useState(events);
 
+  
+
     const handleSelectEvent =   useCallback((e) => window.alert(`Name: ${e.name}\nVenue: ${e.venue}\nLecturer: ${e.lecturer}\nClass: ${e.class}`),[])
 
-    const onDoubleClickEvent = useCallback((e)=>window.alert('hello'),[])
-    // function onDoubleClickEvent(event){
-    //   window.alert("hello")
-    //   const idx = allEvents.indexOf(event)
-    //   setAllEvents(allEvents.filter((ele,index)=>{return index!==idx}))
-    // }
+
+
 
     function eventPropGetter(event) {
       var style = {
@@ -70,13 +84,24 @@ function TimeTable (props) {
       return {style:style}
     }
 
+    
+
 
     function handleAddEvent(eve) {
       console.log("pass through handleAddEvent Fn");
       setAllEvents([...allEvents, eve]);
     }
 
-    
+    useEffect(()=>{
+      eventBus.on('testing',(data)=>{
+        console.log('on')
+        setAllEvents([...allEvents,data])
+      })
+      return ()=>{
+        console.log('remove')
+        eventBus.remove('testing')}
+      },[])
+
 
 
     return (<>
@@ -113,7 +138,7 @@ function TimeTable (props) {
         </div>
 
         <Calendar localizer={localizer} events={allEvents} defaultView={defaultView} defaultDate={defaultDate} style={{ height: 500, margin: "50px"}} 
-        views={{week: true}}  components={{toolbar:CustomToolbar}} min={defaultStartTime} max={defaultEndTime} step={defaultStep} timeslots={2} onSelectEvent={handleSelectEvent} onDoubleClickEvent={onDoubleClickEvent}
+        views={{week: true}}  components={{toolbar:CustomToolbar}} min={defaultStartTime} max={defaultEndTime} step={defaultStep} timeslots={2} onSelectEvent={handleSelectEvent} 
         eventPropGetter={event=>eventPropGetter(event)}/>
     </>);
 }
@@ -121,4 +146,4 @@ function TimeTable (props) {
 
 
 
-export{TimeTable};
+export{Test, TimeTable};

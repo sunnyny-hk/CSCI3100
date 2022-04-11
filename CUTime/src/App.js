@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import "./App.css";
-import { TimeTable } from './timetableComp';
+import { Test ,TimeTable } from './timetableComp';
 import { Search } from './serchComp';
 import { GPA } from './gpaComp';
 import { Friend } from './friendComp';
@@ -40,8 +40,8 @@ function App() {
           <hr />
 
           <Routes>
-            <Route path="/" element={<TimeTable />} />
-            <Route path="/searchbar" element={<Search />} />
+            <Route path="/" element={<><Test/><TimeTable/></>}/>
+            <Route path="/searchbar" element={<Search/>} />
             <Route path="/friend" element={<Friend />} />
             <Route path="/gpa" element={<GPA />} />
             <Route path="*" element={<NoMatch />} />
