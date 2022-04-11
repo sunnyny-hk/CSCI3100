@@ -209,7 +209,7 @@ function TimeTable (props) {
 
         <Calendar localizer={localizer} events={allEvents} defaultView={defaultView} defaultDate={defaultDate} style={{ height: 500, margin: "50px"}} 
         views={{week: true}}  components={{toolbar:CustomToolbar}} min={defaultStartTime} max={defaultEndTime} step={defaultStep} timeslots={2} onSelectEvent={handleSelectEvent} 
-        eventPropGetter={event=>eventPropGetter(event)}/>
+        eventPropGetter={event=>eventPropGetter(event)} dayLayoutAlgorithm = 'no-overlap'/>
 
         <div>
              <table class ="CourseList">
