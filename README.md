@@ -1,6 +1,9 @@
 # CSCI3100
 2022Spring CSCI3100 Project Group G2 
 
+CUTime and Websrapping Folder are used during development stage
+For final project, please refer to file in main page
+
 
 For Develop Purpose:
 
