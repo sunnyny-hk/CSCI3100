@@ -17,7 +17,7 @@ For Develop Purpose:
   Run the server on CUTime/:  
   npm run dev
   
-  Run the react app on CUTime/client/: 
+  Run the react app on CUTime/client/:
   npm start
   
   To Update File   
