@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: blanchedalmond;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+a{
+  text-decoration: none; 
+}
+ul{
+  list-style-type: none;
+}
+button{
+  cursor: pointer;
+}
+
+
+/* ----------------- Header ------------------ */
+@import url("./loginComponents/header/header.css");
+
+
+/* ----------------- Auth ------------------ */
+@import url("./loginComponents/body/auth/auth.css");
+
+
+/* ----------------- Profile ------------------ */
+@import url("./loginComponents/body/auth/profile/Profile.css");
+
+/* ----------------- Manage ------------------ */
+@import url("./loginComponents/body/auth/manage/Manage.css");
+
+
+/* ----------------- Home ------------------ */
+@import url("./home/Home.css");

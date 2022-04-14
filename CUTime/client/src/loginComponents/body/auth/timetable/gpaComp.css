@@ -1,0 +1,43 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.GPA input {
+  width: 40px;
+
+}
+
+.GPA {
+    font-size: 20px;
+    width: 80%;
+    padding: 20px 5px 10px 5px;
+    border: 10px;
+    align-self: baseline;
+    background-color: aqua;
+    box-shadow: 1px 0px 7px rgba(0,0,0,0.5); 
+    border-radius: 5%;
+    margin: auto;
+}
+.GPA  h2{
+  font-size: 30px;
+}
+.GPATable {
+  max-height: 1000px;
+  margin: auto;
+}
+.GPATable td{
+  height: 50px;
+  width: 10%;
+  padding: 10px 0;
+}
+.GPATable #CourseName{
+  width: 30%;
+}

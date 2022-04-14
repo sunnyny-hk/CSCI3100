@@ -1,0 +1,71 @@
+.manage_page h2{
+    color: blueviolet;
+    font-size: 2rem;
+}
+
+/* ------------ Table------------ */
+.users{
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #777;
+    max-width: 1200px;
+    margin: auto;
+
+}
+.users td,.users th{
+    border: 1px solid #ddd;
+    padding: 8px;
+    min-width: 100px;
+}
+.users tr:nth-child(even){
+    background: #f2f2f2;
+}
+.users th{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background: #555;
+    color: white;
+}
+.users i{
+    cursor: pointer;
+}
+.users .fa-check{
+    color: green;
+}
+.users .fa-xmark{
+    color: red;
+}
+.users .fa-user-pen{
+    background: whitesmoke;
+    padding: 7px;
+    color: #555;
+    font-size: 10px;
+}
+.users .fa-trash-can{
+    background: red;
+    padding: 7px;
+    color: white;
+    font-size: 10px;
+    margin-left: 7px;
+}
+
+/*----------- EditUser -------------*/
+
+.edit_user .row{
+    display:block;
+    text-align: left;
+    margin: auto;
+}
+
+.edit_user .all #isAdmin{
+    width: 20px;
+    height: 20px;
+    transform: translateY(3px);
+    margin: 10px 0;
+}
+
+.edit_user .all #isAdmin + label{
+    display: block;
+}
+

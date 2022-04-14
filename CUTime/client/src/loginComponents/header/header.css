@@ -1,0 +1,64 @@
+header{
+    background-color: #61dafb;
+    min-height: 100px;
+    font-size: calc(10px + 2vmin);
+}
+header .top-header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* padding: 0 30px; */
+}
+
+header a{
+    color: #282c34;
+}
+header ul li{
+    opacity: 0.8;
+}
+
+header ul li:hover{
+    opacity: 1;
+}
+
+header ul li img{
+    width: 40px;
+    height: 40px;
+    transform: translateY(10px) ;
+    border-radius: 50%;
+}
+
+header .navbar navbar-expand-sm bg-info{
+    top: 50px;
+}
+
+header .navbar-nav{
+    list-style-type: none;
+    padding-bottom: 10px;
+    padding-left: 0;
+    margin: 0px 0px 10px 0px;
+}
+
+header .navbar-nav li{
+    display: inline;
+    padding: 10px 10px;
+}
+
+
+
+
+/*--------DropDowon ----------*/
+.drop-nav{
+    transform: translateX(-20px);
+}
+.drop-nav .dropDown{
+    position: absolute;
+    display: none;
+}
+
+.drop-nav:hover .dropDown{
+    display: block;
+}
+
+

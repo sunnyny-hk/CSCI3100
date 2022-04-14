@@ -1,0 +1,69 @@
+body {
+    text-align: center;
+}
+
+form { 
+    display: inline-block; 
+    text-align: left; 
+    
+}
+
+.login_page{
+    margin: auto;
+    padding: 100px;
+}
+
+.login_page h2{
+    color: blueviolet;
+    font-size: 2rem;
+}
+
+.login_page input{
+    width: 100%;
+    height: 45px;
+    border: 2px solid #777;
+}
+
+.login_page .row a{
+    display: flex;
+}
+
+.login_page .row a{
+    color:red;
+    text-align:center;
+}
+
+.login_page .row button{
+    width: 150px;
+    padding: 10px 0;
+    color: white;
+    background-color: black;
+    letter-spacing: 1.5px;
+}
+
+/*--------forgot pw-----------*/
+.fg_pw h2{
+    color: blueviolet;
+    font-size: 2rem;
+}
+
+.fg_pw .row{
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    padding: 0 10px;
+}
+
+.fg_pw input{
+    width: 100%;
+    height: 30px;
+    border: 1px solid #777;
+}
+
+/*--------- Activate ------------*/
+.active_page h2{
+    color: rgb(80, 43, 226);
+    font-size: 2rem;
+    text-decoration: underline;
+
+}

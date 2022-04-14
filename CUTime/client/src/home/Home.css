@@ -1,0 +1,19 @@
+.home_page{
+    display: block;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+    padding: 100px 0;
+}
+
+h2{
+    color: blueviolet;
+    font-size: 5rem;
+}
+
+h3{
+    color: rgb(16, 188, 87);
+    font-size: 3rem;
+}
+
