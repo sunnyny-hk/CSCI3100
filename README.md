@@ -14,8 +14,11 @@ For Develop Purpose:
   Initialize the package:  
   npm install  
   
-  Run the app:  
-  npm start  
+  Run the server on CUTime/:  
+  npm run dev
+  
+  Run the react app on CUTime/client/: 
+  npm start
   
   To Update File   
   $ git add .  
