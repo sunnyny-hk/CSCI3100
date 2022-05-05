@@ -1,4 +1,12 @@
-require('dotenv').config();
+/*
+    Description : Operated as a main server, always listening for incoming port. Connect to the MongoDB.
+                  Route URLs to backend functions, and import environment (constant) variables (.env).
+    Contributer : Lau Chun Hin, Kwok Chun Yin, Lau Chun Hin, Wong Man Chun
+    Written on : 2022/2/27
+    Last modified : 2022/5/5
+*/
+
+require('dotenv').config(); 
 
 const express = require('express')
 const mongoose = require('mongoose')
@@ -14,23 +22,24 @@ app.use(fileUpload({
     useTempFiles: true
 }))
 
-// Routes
+// User and Admin operations routes
 app.use('/user', require('./routes/userRouter'))
 app.use('/api', require('./routes/upload'))
 
-// Timetable routes
+// GPA operations routes
 const GPARouter = require('./routes/GPASystem')
-
 app.use('/gpaserver', GPARouter)
 
+// Friend operations routes
 const FriendRouter = require('./routes/FriendSystem')
-
 app.use('/friendserver', FriendRouter)
 
+// Searching operations routes
 const SearchRouter = require('./routes/SearchSystem')
 
 app.use('/searchserver', SearchRouter)
 
+// Timetable operations routes
 const TimetableRouter = require('./routes/TimetableSystem')
 
 app.use('/timetableserver', TimetableRouter)

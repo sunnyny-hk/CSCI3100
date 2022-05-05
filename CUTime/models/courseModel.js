@@ -1,3 +1,10 @@
+/*
+    Description : Schema for courses information
+    Contributer : Sunny Tang, Lau Yu Hin, Kwok Chun Yin, Hui Hiu Kit, Wong Man Chun
+    Written on : 2022/3/24
+    Last modified : 2022/4/10
+*/
+
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 

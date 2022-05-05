@@ -1,3 +1,11 @@
+/*
+    Description : module that contain functions to check the format of email and pw
+    Contributer : Kwok Chun Yin
+    Written on : 2022/4/2
+    Last modified : 2022/4/10
+*/
+
+
 export const isEmpty = value =>{
     if (!value) return true
     return false

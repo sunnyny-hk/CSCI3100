@@ -1,3 +1,16 @@
+/*
+    Description : page for URL "/forgotPassword"  
+                  user access this page once they click forgot password? button on login page
+                  require input for their CUHK email
+                  check the format and send request to backend server by "/user/resetPassword"
+
+                  uses auth.css
+                  
+    Contributer : Kwok Chun Yin
+    Written on : 2022/4/5
+    Last modified : 2022/4/8
+*/
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import {isEmail} from '../../utils/validation/validation'

@@ -1,3 +1,22 @@
+/*
+    Description : Admin function
+
+                  page for URL "/editUser/:id"  
+                  admin access this page once they click edit button for a particular user on manage page
+                  
+                  allow admin to change a user's pw/username/role
+
+                  check the format if needed and send request to backend server 
+                  by "/user/updateUserName_A/${editUser._id}", "/user/updatePassword_A/${editUser._id}", "/user/updateRole/${editUser._id}" 
+                  respectively
+
+                  uses Manage.css
+                  
+    Contributer : Kwok Chun Yin
+    Written on : 2022/4/5
+    Last modified : 2022/4/10
+*/
+
 import React, { useEffect, useState } from 'react';
 import {useParams, useNavigate} from 'react-router-dom'
 import {useSelector} from 'react-redux'

@@ -1,3 +1,10 @@
+/*
+    Description :
+    Contributer : 
+    Written on : 
+    Last modified : 
+*/
+
 import { TimeTable } from "./timetableComp";
 import React,{useRef, useState} from 'react';
 import './searchComp.css';

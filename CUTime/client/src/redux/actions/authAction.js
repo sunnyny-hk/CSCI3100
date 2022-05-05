@@ -1,3 +1,11 @@
+/*
+    Description : action on login (user logged in) -> tell reducer to store state (islogged => true)
+                  action on get current user by sending request to backend server -> tell reducer to store state (user)
+    Contributer : Kwok Chun Yin
+    Written on : 2022/4/5
+    Last modified : 2022/5/5
+*/
+
 import ACTIONS from './index'
 import axios from 'axios'
 

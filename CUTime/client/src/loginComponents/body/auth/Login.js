@@ -1,3 +1,16 @@
+/*
+    Description : page for URL "/login" 
+                  user access this page once they click signUp button at home page
+                  require input for CUHK email/username, pw
+                  check the format and send request to backend server by "/user/login"
+                  
+                  uses auth.css
+                  
+    Contributer : Kwok Chun Yin, Hui Hiu Kit
+    Written on : 2022/2/27
+    Last modified : 2022/4/8
+*/
+
 import React, {useState} from "react";
 import {Link, useNavigate} from 'react-router-dom'
 import {showErrMsg, showSuccessMsg} from '../../utils/notification/notification'

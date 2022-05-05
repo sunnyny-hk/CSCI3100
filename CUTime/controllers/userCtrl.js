@@ -1,3 +1,24 @@
+/*
+    Description : Module for all backend functions for user/admin functions (./user)
+                    register : check if the format of input is correct, and send activation email
+                    activateEmail : verify the activation token, and store account info to DB
+                    login : check the existence of acccount info in DB
+                    getAccessToken : refresh the access token (state)
+                    forgotPassword : check the exitence of the email and send reset email
+                    resetPassword : check the input format of new pw
+                    getUserInfor : get user information for state
+                    getUserAllInfor : get all user information for admin operations
+                    logout : clear cookies for logout
+                    updateUsersRole : change the role of a user by Admin 
+                    deleteUser : delete a particular user by Admin
+                    updateUserName : change username for normal users
+                    updateUserName_A : change username by Admin
+                    updateUserPassword_A : change password by Admin
+    Contributer : Kwok Chun Yin
+    Written on : 2022/2/27
+    Last modified : 2022/5/5
+*/
+
 const Users = require('../models/userModel')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
@@ -175,21 +196,6 @@ const userCtrl = {
         try {
             res.clearCookie('refreshtoken', {path: '/user/refresh_token'})
             return res.json({msg: "Logged out."})
-           
-        } catch (err) {
-            return res.status(500).json({msg: err.message})
-        }
-    },
-    updateUser :async (req, res)=>{
-        try {
-
-            const {userName, image}  = req.body
-            await Users.findOneAndUpdate({_id: req.user.id}, {
-                "userName": userName,
-                "image" : image
-            })
-            
-            return res.json({msg: "Update success."})
            
         } catch (err) {
             return res.status(500).json({msg: err.message})

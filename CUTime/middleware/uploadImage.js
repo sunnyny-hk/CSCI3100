@@ -1,3 +1,10 @@
+/*
+    Description : middleware for checking the format of the file 
+    Contributer : Kwok Chun Yin
+    Written on : 2022/3/31
+    Last modified : 2022/5/5
+*/
+
 const fs = require('fs')
 
 module.exports = async function(req, res, next){
@@ -18,12 +25,14 @@ module.exports = async function(req, res, next){
         }
 
         next()
+
     } catch (err) {
         removeTmp(file.tempFilePath)
         return res.status(500).json({msg: err.message})
     }
 }
 
+// remove local temparary file
 const removeTmp = (path) => {
     fs.unlink(path, err => {
         if(err) throw err

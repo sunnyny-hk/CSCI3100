@@ -1,3 +1,10 @@
+/*
+    Description :
+    Contributer : 
+    Written on : 
+    Last modified : 
+*/
+
 import React, { useState, forwardRef, useCallback, useEffect } from "react";
 import { Calendar, momentLocalizer , Views } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";

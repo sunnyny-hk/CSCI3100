@@ -1,3 +1,24 @@
+/*
+    Description : Admin function
+
+                  page for URL "/manage"
+
+                  use redux to store all user information ie sending action -> reducer receive action and change tha state)
+
+                  admin access this page once they click edit button for a particular user on manage page
+                  
+                  allow admin view information for all user and edit/delete a particular user
+
+                  link admin to "/edit" if they click the edit button
+                  delete a particular user by sending request to backend server "/user/delete/${id}"
+                  
+                  uses Manage.css
+                  
+    Contributer : Kwok Chun Yin
+    Written on : 2022/4/5
+    Last modified : 2022/4/10
+*/
+
 import React, {useState, useEffect} from "react";
 import axios from 'axios'
 import {useSelector, useDispatch} from 'react-redux'

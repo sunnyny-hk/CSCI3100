@@ -1,4 +1,9 @@
-// send email with gmail
+/*
+    Description : backend function for sending email with Gmail services using Google API (oauth2)
+    Contributer : Kwok Chun Yin
+    Written on : 2022/3/29
+    Last modified : 2022/4/8
+*/
 
 const nodemailer = require('nodemailer')
 const {google} = require('googleapis')

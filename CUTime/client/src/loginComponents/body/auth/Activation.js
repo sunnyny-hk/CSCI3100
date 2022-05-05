@@ -1,3 +1,16 @@
+/*
+    Description : page for URL "/user/activate/:activation_token"  
+                  user access this page once they click the acctivation link with token from their email after they register
+                  inform user whether the account has successfully register or not 
+                  send request to backend server by "/user/forgotPassword"
+
+                  uses auth.css
+                  
+    Contributer : Kwok Chun Yin
+    Written on : 2022/4/5
+    Last modified : 2022/4/8
+*/
+
 import React, {useState, useEffect} from "react";
 import {Link, useParams} from 'react-router-dom'
 import {showErrMsg, showSuccessMsg} from '../../utils/notification/notification'

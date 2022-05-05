@@ -1,3 +1,11 @@
+/*
+    Description : frontend app page that mainly for using redux to dispatch (sending action) -> store state
+                    ie current user info, token, login status
+    Contributer : Sunny Tang, Lau Yu Hin, Kwok Chun Yin, Hui Hiu Kit, Wong Man Chun
+    Written on : 2022/2/27
+    Last modified : 2022/4/10
+*/
+
 import React, { useEffect } from 'react'
 import {BrowserRouter as Router} from 'react-router-dom' 
 import {useDispatch, useSelector} from 'react-redux'
@@ -20,7 +28,7 @@ function App() {
     if (firstLogin){
       try {
         const getToken = async() =>{
-        const res = await axios.post('/user/refresh_token', null) // counld not proxy?
+        const res = await axios.post('/user/refresh_token', null)
         console.log(res)
         dispatch({type: 'GET_TOKEN', payload: res.data.access_token}) // assign token 
         

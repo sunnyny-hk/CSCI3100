@@ -1,3 +1,10 @@
+/*
+    Description : frontend home page "/＂ uses home.css
+    Contributer : Kwok Chun Yin
+    Written on : 2022/4/8
+    Last modified : 2022/4/10
+*/
+
 import React from 'react';
 
 function Home (){

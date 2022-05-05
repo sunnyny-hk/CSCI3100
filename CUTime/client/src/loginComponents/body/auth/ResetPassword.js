@@ -1,3 +1,17 @@
+/*
+    Description : page for URL "/user/reset/:token"  
+                  user access this page once they click the reset pw link with token from their email
+                  require input for new pw and confirm pw
+                  check the format and send request to backend server by "/user/resetPassword"
+
+                  uses auth.css
+                  
+    Contributer : Kwok Chun Yin
+    Written on : 2022/4/5
+    Last modified : 2022/4/8
+*/
+
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import {showErrMsg,showSuccessMsg} from '../../utils/notification/notification'

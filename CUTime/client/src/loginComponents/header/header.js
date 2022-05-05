@@ -1,3 +1,20 @@
+/*
+    Description : frontend header part act as a router which 
+                  show navigation bar linking to respective URLs with restriction of user role (user/admin) and curent state
+                  For user have not logged in: 
+                        only show sign up and sign in
+                  For user have logged in:
+                        show all common user functions (timetable, friend, GPA, logout, profile)
+                  For admin:
+                        show all common user functions and mange
+
+                  uses header.css
+                  
+    Contributer : Sunny Tang, Lau Yu Hin, Kwok Chun Yin, Hui Hiu Kit, Wong Man Chun
+    Written on : 2022/2/27
+    Last modified : 2022/4/10
+*/
+
 import React from 'react'
 import {Link} from 'react-router-dom'
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

@@ -1,3 +1,10 @@
+/*
+    Description :
+    Contributer : 
+    Written on : 
+    Last modified : 
+*/
+
 import logo from './logo.svg';
 import "./Timetable.css";
 import { Test ,TimeTable } from './timetableComp';

@@ -1,3 +1,11 @@
+/*
+    Description : frontend body part (bottom) act as a router which routes to different URLs with restriction of user role (user/admin) 
+                  css of this page is defaulted in index.js
+    Contributer : Sunny Tang, Lau Yu Hin, Kwok Chun Yin, Hui Hiu Kit, Wong Man Chun
+    Written on : 2022/2/27
+    Last modified : 2022/4/10
+*/
+
 import React from 'react'
 import Login from './auth/Login'
 import {Routes, Route} from 'react-router-dom'

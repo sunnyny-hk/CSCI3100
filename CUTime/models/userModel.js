@@ -1,3 +1,16 @@
+/*
+    Description : Schema for register courses of a user A in MongDB, describe the user information
+                  it also describe the friend relation of a user:
+                    in specific,
+                        request store the objectId of user B that A sent a request to B
+                        received store the objectId of user B that A received a friend request from B
+                        friend store the objectId of user B that A is a friend of B after B/A accept a friend request
+
+    Contributer : Sunny Tang, Lau Yu Hin, Kwok Chun Yin, Hui Hiu Kit, Wong Man Chun
+    Written on : 2022/3/24
+    Last modified : 2022/4/10
+*/
+
 const mongoose = require('mongoose')
 const course = require('./courseModel')
 const Schema = mongoose.Schema

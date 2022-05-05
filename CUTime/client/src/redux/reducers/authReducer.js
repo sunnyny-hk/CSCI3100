@@ -1,3 +1,11 @@
+/*
+    Description : reducer for authentication 
+                    ie control state of current user info, whether user is logged in and whether user is an admin
+    Contributer : Kwok Chun Yin
+    Written on : 2022/4/5
+    Last modified : 2022/4/10
+*/
+
 import ACTIONS from '../actions'
 
 const initialState = {

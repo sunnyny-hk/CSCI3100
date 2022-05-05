@@ -1,3 +1,10 @@
+/*
+    Description : middleware for checking the token for authenication of admin
+    Contributer : Kwok Chun Yin
+    Written on : 2022/3/31
+    Last modified : 2022/4/10
+*/
+
 const Users = require('../models/userModel')
 
 const authAdmin = async (req, res, next) => {

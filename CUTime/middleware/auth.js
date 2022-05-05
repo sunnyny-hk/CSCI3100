@@ -1,5 +1,11 @@
-const jwt = require('jsonwebtoken')
+/*
+    Description : middleware for checking the token for authenication of any users
+    Contributer : Kwok Chun Yin
+    Written on : 2022/3/31
+    Last modified : 2022/4/10
+*/
 
+const jwt = require('jsonwebtoken')
 
 const auth = (req, res, next) => { // translate token to user.id and pass back to req.user
     try {
