@@ -1,14 +1,15 @@
 .errMsg{
-    background: rgb(214, 10, 10);
-    color: #fff9;
+    background: crimson;
+    color:whitesmoke;
     text-align: center;
     padding: 10px 0;
     letter-spacing: 1.3px;
+    width: 100%;
 }
 
 .successMsg{
-    background: rgb(9, 158, 54);
-    color: #fff9;
+    background: rgb(22, 172, 67);
+    color: whitesmoke;
     text-align: center;
     padding: 10px 0;
     letter-spacing: 1.3px;

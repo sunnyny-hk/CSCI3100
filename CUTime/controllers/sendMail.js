@@ -3,6 +3,8 @@
     Contributer : Kwok Chun Yin
     Written on : 2022/3/29
     Last modified : 2022/4/8
+
+    Reference : (Google API) https://www.youtube.com/watch?v=npsi7ZkjvQo for sending activation email
 */
 
 const nodemailer = require('nodemailer')
