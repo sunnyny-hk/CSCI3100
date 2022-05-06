@@ -3,6 +3,8 @@
     Contributer : Kwok Chun Yin
     Written on : 2022/3/31
     Last modified : 2022/4/10
+
+    Reference : (configuring middleware workflow for token in js) https://www.youtube.com/watch?v=npsi7ZkjvQo 
 */
 
 const Users = require('../models/userModel')

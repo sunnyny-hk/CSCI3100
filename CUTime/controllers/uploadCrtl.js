@@ -3,6 +3,8 @@
     Contributer : Kwok Chun Yin
     Written on : 2022/3/29
     Last modified : 2022/5/5
+
+    Reference : (configuring Cloudinary) https://www.youtube.com/watch?v=npsi7ZkjvQo for uploading file and retain the URL
 */
 
 

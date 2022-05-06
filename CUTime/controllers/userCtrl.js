@@ -17,6 +17,8 @@
     Contributer : Kwok Chun Yin
     Written on : 2022/2/27
     Last modified : 2022/5/5
+
+    Reference : https://www.youtube.com/watch?v=npsi7ZkjvQo for configuring token operations, password encryption using js
 */
 
 const Users = require('../models/userModel')
@@ -108,7 +110,7 @@ const userCtrl = {
             //else res.json({msg: user.password})
             
             const isMatch = await bcrypt.compare(password, user.password)
-            if (!isMatch) return res.status(400).json({msg: "Pass is incorrect"})
+            if (!isMatch) return res.status(400).json({msg: "Password is incorrect"})
             
             const refresh_token = createRefreshToken({id: user._id})
             res.cookie('refreshtoken', refresh_token, {

@@ -1,3 +1,18 @@
+/*
+    Description : Common user function
+
+                  page for URL "/profile"
+
+                  Allow user change their username/ password/ icon
+                  
+                  uses Profile.css
+                  
+    Contributer : Kwok Chun Yin
+    Written on : 2022/4/5
+    Last modified : 2022/4/10
+
+    Reference : (setting up profile) https://www.youtube.com/watch?v=npsi7ZkjvQo for file processing, react-redux in js
+*/
 import React, {useState, useEffect} from "react";
 import axios from 'axios'
 import {useSelector, useDispatch} from 'react-redux'

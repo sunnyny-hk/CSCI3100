@@ -17,6 +17,8 @@
     Contributer : Kwok Chun Yin
     Written on : 2022/4/5
     Last modified : 2022/4/10
+
+    Reference : (setting up admin manage) https://www.youtube.com/watch?v=npsi7ZkjvQo for using react-redux, setting table by mapping all user info in js
 */
 
 import React, {useState, useEffect} from "react";
