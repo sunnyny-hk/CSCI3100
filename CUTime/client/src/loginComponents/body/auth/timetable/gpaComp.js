@@ -2,6 +2,8 @@
     Description : page for URL "/gpa" 
                   user access this page once they click GPA button at home page
                   require input from user
+                  display user's chosen courses
+                  help user calculate cGPA of the term
                   check the format and send request to backend server by "/gpaserver"
                   
                   uses gpaComp.css

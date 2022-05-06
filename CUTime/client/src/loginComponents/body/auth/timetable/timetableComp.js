@@ -2,6 +2,8 @@
     Description : page for URL "/timetable" 
                   user access this page once they click timetable button at home page
                   require input from search component
+                  display user's chosen courses
+                  interact with user and search component to create the timetable designed by the user
                   check the format and send request to backend server by "/timetableserver"
                   
                   uses timetableComp.css

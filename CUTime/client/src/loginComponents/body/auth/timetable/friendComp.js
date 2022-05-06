@@ -2,8 +2,10 @@
     Description : page for URL "/friend" 
                   user access this part once they click Friend button at home page
                   require input from user
+                  display the friend list, friend request to user
+                  provide search features
                   check the format and send request to backend server by "/friendserver" 
-                  display the friend list to server
+                  return the search result to user
                   
                   uses friendComp.css
                   

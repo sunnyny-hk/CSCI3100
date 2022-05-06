@@ -3,6 +3,7 @@
                   user access this part once they click Timetable button at home page
                   require input from user
                   check the format and send request to backend server by "/searchserver"
+                  return the search result to user
                   
                   uses searchComp.css
                   
