@@ -46,9 +46,9 @@ const PMto24 = {
 
 
 router.get("/",async(req, res) => {
-    //get data from the db
-
+    //get data from the db//
     async function addtodata(register, e, data, index){
+        //add courses data to user db//
         var time;
         if (e['7'].slice(5,7) === "PM" && e['7'].slice(0,2) != "12") {time = PMto24[e['7'].slice(0,2)]+e['7'].slice(2,5);}
         else if (e['7'].slice(6,7) === "AM" && e['7'].slice(0,2) == "12"){ time = "00"+e['7'].slice(2,5);}
@@ -77,26 +77,26 @@ router.get("/",async(req, res) => {
           });
     }
     async function getcourseinfo (register, data, i){
-        
-            var index = i;
-            console.log("i = "+i);
-            let event = await Course.findById(
-            register[i].course,
-            async(err, e) => {
-                if(err){
-                    console.log("error------------------")
-                } else{
-                    console.log(e, index)
-                    let error = await addtodata(register, e, data, index);
-                    console.log("after getting the obj")
-                    console.log("index, i, length"+index+i+register.length);
-                }
+        //get course info from course db//
+        var index = i;
+        console.log("i = "+i);
+        let event = await Course.findById(
+        register[i].course,
+        async(err, e) => {
+            if(err){
+                console.log("error------------------")
+            } else{
+                console.log(e, index)
+                let error = await addtodata(register, e, data, index);
+                console.log("after getting the obj")
+                console.log("index, i, length"+index+i+register.length);
             }
-            ).clone();
-            return new Promise(resolve => {
-                setTimeout(()=>{
-                  resolve('resolved');},10);
-              });
+        }
+        ).clone();
+        return new Promise(resolve => {
+            setTimeout(()=>{
+                resolve('resolved');},10);
+            });
     }
 
 
@@ -143,6 +143,7 @@ router.get("/",async(req, res) => {
     console.log(req.query)
 })
 router.post("/", urlencodeedParser, async(req, res) => {
+    //post data to db//
     console.log("hi, is post ")
     console.dir(req.body)
     console.log(req.body.type)

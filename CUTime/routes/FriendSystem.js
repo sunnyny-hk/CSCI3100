@@ -20,34 +20,35 @@ mongoose.connect('mongodb+srv://admin:CSCI3100Admin@timetable.tzczu.mongodb.net/
 
  
 async function getfriendrequest(list_received,request_list){
-for (const i in list_received) {
-    await User.find(
-        {_id: list_received[i]._id},
-        (err, e) => {
-            if (err) res.send(err)
-            else {
-                if(e.length !=0){
-                    let obj = 
-                    { 
-                        Name: e[0].userName,
-                        ID: e[0]._id 
-            
+    //get the friend request list in user db//
+    for (const i in list_received) {
+        await User.find(
+            {_id: list_received[i]._id},
+            (err, e) => {
+                if (err) res.send(err)
+                else {
+                    if(e.length !=0){
+                        let obj = 
+                        { 
+                            Name: e[0].userName,
+                            ID: e[0]._id 
+                
+                        }
+                        request_list.push(obj)
                     }
-                    request_list.push(obj)
                 }
-            }
-            console.log(request_list)
-        } 
-    ).clone()
-}
-return new Promise(resolve => {
-    setTimeout(()=>{
-      resolve('resolved');},10);
-  });
+                console.log(request_list)
+            } 
+        ).clone()
+    }
+    return new Promise(resolve => {
+        setTimeout(()=>{
+        resolve('resolved');},10);
+    });
 }
 
 router.get("/",async(req, res) => {
-    //get data from the db
+    //get friend and friend request list from the user db//
     if(req.query.current_id != null&&req.query.type == 'start'){
         let name_list = []
         let user_id = req.query.current_id;
@@ -140,11 +141,12 @@ router.get("/",async(req, res) => {
 })
 
 router.post("/", urlencodeedParser, async(req, res) => {
+    //delete and add and send request//
     console.log("hi, is post ")
     console.dir(req.body)
     console.log(req.body.type)
     if(req.body.type == "delete"){
-        //delete the friend in the db for both guys
+        //delete the friend in the db for both guys//
         let user_id = req.body.current_id;
         let user_id_ref = mongoose.Types.ObjectId(user_id)
         let requester_ID = req.body.User_ID // need to get requester's name
@@ -171,7 +173,7 @@ router.post("/", urlencodeedParser, async(req, res) => {
         )
 
     }else if(req.body.type == "add"){
-        //delete the friend request and add friend to both guys
+        //delete the friend request and add friend to both guys//
         let user_id = req.body.current_id;
         let user_id_ref = mongoose.Types.ObjectId(user_id)
         let requester_ID = req.body.User_ID // need to get requester's name
@@ -196,7 +198,7 @@ router.post("/", urlencodeedParser, async(req, res) => {
             }
         );
     }else if(req.body.type == "sendRequest"){
-        //add a friend request to the related user request list
+        //add a friend request to the related user request list//
         // check is receiver in the list of request/ check is user in the list of receiver/ check are they friend already before enter this state
         let user_id = req.body.current_id;
         let user_id_ref = mongoose.Types.ObjectId(user_id)

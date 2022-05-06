@@ -70,11 +70,12 @@ const PMto24 = {
 }
 
 function Search(props) {
-
+    //generate Search component//
     const [data,setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
 
     function SearchedItem(props) {
+        //add records to course list//
         let i = props.i;
 
         return (
@@ -123,8 +124,9 @@ function Search(props) {
     }
 
     function SearchBar(props) {
-
+        //display search bar//
         function searchCourse(props) {
+            //get response from search server//
             fetch("/searchserver?keyword="+document.getElementById("search-text").value).then(
                 response => response.json()
             ).then(

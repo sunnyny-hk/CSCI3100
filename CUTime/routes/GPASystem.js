@@ -20,8 +20,9 @@ mongoose.connect('mongodb+srv://admin:CSCI3100Admin@timetable.tzczu.mongodb.net/
 
 
 router.get("/",async (req, res) => {
-    //get data from the db
+    //get data from db//
     async function addtodata(register, e, index){
+        //get courses from the user db//
         const obj = {
             COURSE_ID: parseInt(e['1']),
             COURSE_CODE: e['0'],
@@ -36,33 +37,33 @@ router.get("/",async (req, res) => {
           });
     }
     async function getcourseinfo (register, data, i){
-        
-            var index = i;
-            console.log("i = "+i);
-            let event = await Course.findById(
-            register[i].course,
-            async(err, e) => {
-                if(err){
-                    console.log("error------------------")
-                } else{
-                   let error = await addtodata(register, e, index);
-                    console.log("after getting the obj")
-                    console.log("index, i, length"+index+i+register.length);
-                }
+        //get courses info from the user db//
+        var index = i;
+        console.log("i = "+i);
+        let event = await Course.findById(
+        register[i].course,
+        async(err, e) => {
+            if(err){
+                console.log("error------------------")
+            } else{
+                let error = await addtodata(register, e, index);
+                console.log("after getting the obj")
+                console.log("index, i, length"+index+i+register.length);
             }
-            ).clone();
-           console.log("after getting the data")
+        }
+        ).clone();
+        console.log("after getting the data")
 
 
-            return new Promise(resolve => {
-                setTimeout(()=>{
-                  resolve('resolved');},10);
-              });
+        return new Promise(resolve => {
+            setTimeout(()=>{
+                resolve('resolved');},10);
+            });
     }
 
     
     async function senddata(){
-
+        //send data back to frontend//
         res.json(data)
                 console.log( "data =")
                 console.dir(data)
@@ -116,6 +117,7 @@ router.get("/",async (req, res) => {
 })
 
 router.post("/", urlencodeedParser, async(req, res) => {
+    //put GPA to a user in user db//
     console.log("hi, is post ")
     console.dir(req.body)
     console.log(req.body.COURSE_ID)

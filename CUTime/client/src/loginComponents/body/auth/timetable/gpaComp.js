@@ -18,8 +18,9 @@ import React,{useEffect, useRef, useState} from 'react';
 import './gpaComp.css'
 import {useSelector} from 'react-redux';
 
-var GPARex = /^(:?A|A-|B\+|B|B-|C\+|C|C-|D\+|D|F)$/;
+var GPARex = /^(:?A|A-|B\+|B|B-|C\+|C|C-|D\+|D|F)$/; //validation check in the user input//
 
+//Conversion of the GPA to Score
 const GPAMapping = {
     "A": 4.0,
     "A-": 3.7,
@@ -33,7 +34,9 @@ const GPAMapping = {
     "D": 1.0,
     "F": 0.0
 }
+
 function GPA(props){
+    //generate GPA page//
     const [COURSEGPA,setCOURSEGPA]= useState([]);
     const [backendData,setBackendData]= useState([{}]) //for checking only//
     const [message,setmessage] = useState();
@@ -43,6 +46,7 @@ function GPA(props){
     const {user, isLogged} = auth
     const current_id = user._id;
     
+    //get user courses// 
     useEffect(() => {
         if(user._id)
         fetch("/gpaserver?current_id="+current_id).then(
@@ -73,6 +77,7 @@ function GPA(props){
     let GPASum = 0;
     
     function Calc(){
+        //calculate the overall GPA//
         GPASum = 0;
         creditSum = 0;
         COURSEGPA.map((a) =>{
@@ -84,7 +89,7 @@ function GPA(props){
     }
     
     function RequestCalculation(){
-        //calculate the overall GPA
+        //display the overall GPA//
         //relatedCourseInfo(CourseID);
         Calc();
                 
@@ -96,10 +101,11 @@ function GPA(props){
     }
     
     function RelatedCourseInfo(CourseID){
-        //Get the course Info from the database
+        //Get the course Info from the database//
     }
     
     function GetGPA(CourseID){
+        //display and ask for user input//
         let i = CourseID.i;
         return(
             <>
@@ -137,6 +143,7 @@ function GPA(props){
     
     
     function SaveGPA(CourseID, CourseGPA){
+        //save to server//
         const newobj = COURSEGPA[CourseID];
         newobj.GPA = CourseGPA;
             setCOURSEGPA(COURSEGPA => COURSEGPA.map((value, i) => i === CourseID ? newobj: value));
@@ -161,7 +168,7 @@ function GPA(props){
     }
     
     function DisplayGPA(userID){
-        //display user course result
+        //display user course result//
         
         let i = COURSEGPA.i;
         return(
@@ -173,6 +180,7 @@ function GPA(props){
             </tr>
         )
     }
+
     return(
         <>
         <div className= "GPA">

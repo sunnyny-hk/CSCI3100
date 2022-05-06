@@ -21,6 +21,7 @@ import './friendComp.css'
 
 
 function Friend(props) {
+    //generate friend page//
     const [friend,setFriend] = useState([]);
 
     const [relatedUser,setRelatedUser] = useState([]);
@@ -41,6 +42,7 @@ function Friend(props) {
     const current_id = user._id;
     console.log(current_id)
     const [searchField,setSearchField] = useState("");
+    //get user friend list and friend request//
     useEffect(() => {
         if(user._id)
         fetch("/friendserver?type=start&current_id="+current_id).then(
@@ -57,6 +59,7 @@ function Friend(props) {
     },[user._id])
 
     function RFriendList(props) {
+        //display searched friend list//
         let i = props.i;
 
         function checkTimetable(id, e) {
@@ -74,6 +77,7 @@ function Friend(props) {
     }
 
     const SearchFriend = (e) =>{
+        //search friend in friend list//
         //window.alert(document.querySelector("#search-text").value);
             if(e.target.value == ""){
                 setRelatedFriend(friend)
@@ -93,8 +97,9 @@ function Friend(props) {
     }
 
     function DeleteFriend(UserID){
-        //delete friend from the user database
+        //delete friend from the user database//
         function DeleteUser(props) {
+            //update local storage//
             console.log(friend[0].ID)
             console.log(UserID);
             setFriend(friend => friend.filter((value, i) => value.ID !== UserID));
@@ -132,10 +137,12 @@ function Friend(props) {
     }
 
     function ShowUserInfo(props){
+        //checking//
         console.log("Show User Info : " + props);
     }
 
     function RelatedUserList(props) {
+        //show users from searching//
         let i = props.i;
 
         return (
@@ -152,8 +159,9 @@ function Friend(props) {
     }
 
     function SearchRelatedUser(props) {
-
+        //searching//
         function search(props) {
+            //send request to friend server//
             fetch("/friendserver?type=search&username="+document.getElementById("search-user").value+"&current_id="+current_id).then(
                 response => response.json()
             ).then(
@@ -183,8 +191,9 @@ function Friend(props) {
     }
 
     function SendRequest(UserID){
-        //send friend request to user
+        //send friend request to user//
         function SendFriendRequest(props) {
+            //send request to server//
             window.alert("Send friend request to " + relatedUser[UserID].Name);
             //update the server//
             const requestOptions = {
@@ -219,6 +228,7 @@ function Friend(props) {
     }
 
     function FriendRequestList(props) {
+        //display friend request list//
         let i = props.i;
         
         return (
@@ -235,8 +245,9 @@ function Friend(props) {
     }
 
     function AddFriend(UserID){
-        //delete friend from the user database
+        //add friend from the user database//
         function AddUser(props) {
+            //send request to switch a user from friend request to friend list//
             window.alert("You are now friend with "+friendRequest[UserID].Name);
             let obj = friend;
             obj.push(friendRequest[UserID]);

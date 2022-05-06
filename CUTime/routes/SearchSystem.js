@@ -18,9 +18,9 @@ mongoose.connect('mongodb+srv://admin:CSCI3100Admin@timetable.tzczu.mongodb.net/
 
 
 router.get("/", async (req, res) => {
-    //get data from the db
+    //get data from the course db//
     if (req.query.keyword!=undefined){
-//get data from db---
+//get data from course db---
         console.log("start----------------")
         let event = await Course.find(
             {0:{ $regex: req.query.keyword}},
