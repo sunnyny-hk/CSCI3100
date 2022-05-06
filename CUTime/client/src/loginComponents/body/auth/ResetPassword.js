@@ -39,6 +39,7 @@ function ResetPassword() {
     const handleSubmit = async e =>{
         e.preventDefault()
         try {
+            // format checking at frontend
             if (!isMatch(password, cf_password))
                 return setData({...data, err: "Password do not match", success: '' })
 
@@ -67,7 +68,7 @@ function ResetPassword() {
             {err && showErrMsg(err)}
             {success && showSuccessMsg(success)}
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}> 
 
                 <div>
                     <label htmlFor= "password">Password</label>

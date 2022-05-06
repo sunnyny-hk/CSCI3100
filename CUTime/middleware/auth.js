@@ -4,7 +4,7 @@
     Written on : 2022/3/31
     Last modified : 2022/4/10
 
-    Reference : (configuring middleware workflow for token in js) https://www.youtube.com/watch?v=npsi7ZkjvQo 
+    Reference : (configuring middleware structure for authentication in node.js) https://www.youtube.com/watch?v=npsi7ZkjvQo 
 */
 
 const jwt = require('jsonwebtoken')

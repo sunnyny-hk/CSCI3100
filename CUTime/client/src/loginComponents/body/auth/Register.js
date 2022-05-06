@@ -39,16 +39,17 @@ function Register(){
     const handleSubmit = async e =>{
         e.preventDefault()
         try {
+            // fromat checking at frontend
             if (isEmpty(userName) || isEmpty(password))
                 return setUser({...user, err: "Please fil all fields", success: '' })
 
-            if (!isEmail(email))
+            if (!isEmail(email)) // check CUHK email
                 return setUser({...user, err: "Invalid email", success: '' })
 
-            if (isLength(email))
+            if (isLength(email)) 
                 return setUser({...user, err: "Password at least 8 characters", success: '' })
 
-            if (!isMatch(password, cf_password))
+            if (!isMatch(password, cf_password)) 
                 return setUser({...user, err: "Password do not match", success: '' })
 
             const res = await axios.post('/user/register',

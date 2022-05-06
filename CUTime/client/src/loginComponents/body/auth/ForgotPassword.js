@@ -34,7 +34,7 @@ function ForgotPassword() {
     }
 
     const forgotPassword = async ()=> {
-        if (!isEmail(email))
+        if (!isEmail(email)) // check CUHK email
             return setData({...data, err: 'Invalid email', success: ''})
 
         try {

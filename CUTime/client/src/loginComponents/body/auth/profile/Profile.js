@@ -112,7 +112,7 @@ function Profile() {
 
     const updateUserName =  async () => {
         try {
-            //console.log(userName)
+
             const res = await axios.patch('/user/updateUserName', 
             JSON.stringify({userName: userName? userName: user.userName})
             ,{

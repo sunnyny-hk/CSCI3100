@@ -49,14 +49,12 @@ function Login(){
             );
             setUser({...user, err: '', success: res.data.msg})
             
-            localStorage.setItem('firstLogin', true) // ? for token
+            localStorage.setItem('firstLogin', true) // for token
 
-            dispatch(dispatchLogin()) // ? (redux) isLogged => true
+            dispatch(dispatchLogin()) //  (redux) isLogged => true
 
             navigate("/") // redirect to "/"
 
-
-            //console.log(res);
         } catch (err) {
             
             err.response.data.msg &&

@@ -51,7 +51,7 @@ function EditUser() {
     const users = useSelector(state => state.users)
     const token = useSelector(state => state.token)
 
-    const [num, setNum] = useState(0)
+    const [num, setNum] = useState(0) // num of time admin click the checkbox (changing user role)
 
     useEffect(() => {
         if (users.length !== 0){
@@ -115,7 +115,8 @@ function EditUser() {
 
     const handleUpdateRole = async () => {
         try {
-            if(num % 2 !== 0){
+            
+            if(num % 2 !== 0){ // odd -> changed user role
                 const res = await axios.patch(`/user/updateRole/${editUser._id}`, JSON.stringify({
                     role: checkAdmin ? 1 : 0
                 }), {
@@ -130,6 +131,7 @@ function EditUser() {
         }
     }
 
+    // when admin click checkbox
     const handleCheck = () =>{
         setData({...data, checkAdmin: !checkAdmin, err:'', success: ''})
         setNum(num + 1)

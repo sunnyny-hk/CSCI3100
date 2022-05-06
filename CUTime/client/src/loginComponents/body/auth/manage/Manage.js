@@ -55,7 +55,7 @@ function Manage() {
             })
     },[token, dispatch, callback])
 
-
+    // when user press the delete button (image)
     const handleDelete = async (id, userName) =>{
         try {
             console.log(id, userName)

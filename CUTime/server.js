@@ -1,7 +1,7 @@
 /*
     Description : Operated as a main server, always listening for incoming port. Connect to the MongoDB.
                   Route URLs to backend functions, and import environment (constant) variables (.env).
-    Contributer : Lau Chun Hin, Kwok Chun Yin, Lau Chun Hin, Wong Man Chun
+    Contributer : Lau Chun Hin, Kwok Chun Yin, Wong Man Chun
     Written on : 2022/2/27
     Last modified : 2022/5/5
 */
