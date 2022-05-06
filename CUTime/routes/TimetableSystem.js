@@ -1,8 +1,9 @@
 /*
-    Description :
-    Contributer : 
+    Description : Backend of the Timetable System, 
+                    receive the HTTP Requests from client and connect to the database
+    Contributer : Lau Yu Hin
     Written on : 2022/3/28
-    Last modified : 2022/4/10
+    Last modified : 2022/5/6
 */
 
 const User = require('../models/userModel')
@@ -11,10 +12,7 @@ const Registered = require('../models/registeredModel')
 const router = require('express').Router()
 const bodyParser = require('body-parser')
 const urlencodeedParser = bodyParser.urlencoded({extended: true})
-//const cors = require("cors");
-//app.use(cors());
 router.use(bodyParser.json())
-
 var mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://admin:CSCI3100Admin@timetable.tzczu.mongodb.net/timetable_info?retryWrites=true&w=majority')
 
@@ -86,28 +84,15 @@ router.get("/",async(req, res) => {
             register[i].course,
             async(err, e) => {
                 if(err){
-                    /*res.json("No course for current_id in GPA system")
-                    res.set({'Content-Type': 'text/plain'});res.send(`${err}`);
-                    return;*/
                     console.log("error------------------")
                 } else{
                     console.log(e, index)
-                    //console.log("looping:"+index)
                     let error = await addtodata(register, e, data, index);
                     console.log("after getting the obj")
-                    //console.log(obj)
-                    //console.log("looping:")
-                    //console.dir(data);
                     console.log("index, i, length"+index+i+register.length);
-
-                   
-
                 }
             }
             ).clone();
-           console.log("after getting the data")
-
-
             return new Promise(resolve => {
                 setTimeout(()=>{
                   resolve('resolved');},10);
@@ -136,10 +121,6 @@ router.get("/",async(req, res) => {
         if(register.length == 0){
             res.json("No data for current_id in GPA system")
         }else{
-            //res.json(await getcourseinfo(register, data))
-            //console.log( "data ="+data)
-
-            //var resolvedProm = await getcourseinfo(register, data)
             console.log("starting of the loop")
             var i=0;
             while(i<register.length){
@@ -153,7 +134,6 @@ router.get("/",async(req, res) => {
         }
         
         if(register.length != 0){ // debugging
-            //console.log(register);
             console.log("got in testing1 la")
         }
     }else{

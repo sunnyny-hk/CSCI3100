@@ -1,8 +1,15 @@
 /*
-    Description :
-    Contributer : 
-    Written on : 
-    Last modified : 
+    Description : page for URL "/friend" 
+                  user access this part once they click Friend button at home page
+                  require input from user
+                  check the format and send request to backend server by "/friendserver" 
+                  display the friend list to server
+                  
+                  uses friendComp.css
+                  
+    Contributer : Lau Yu Hin
+    Written on : 2022/3/28
+    Last modified : 2022/5/6
 */
 
 import { dblClick } from '@testing-library/user-event/dist/click';
@@ -47,33 +54,6 @@ function Friend(props) {
         )
     },[user._id])
 
-/*    const requestOptions = {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-            current_id: "00001",
-            addfriend: "00002"
-        })
-    }*/
-
-    /*function FriendColumn(props){
-        const friendList = friend.map((list, index) => <FriendList i={index} key={index} />);
-        return(
-            <>
-                <div className="FriendListPanel">
-                    <div className="FriendListIcon">
-                    </div>
-                    <div className='FriendList'>
-                        <h2>My Friends</h2>
-                        <h2><SearchFriend /></h2>
-                        <ul>{friendList}</ul>
-                    </div>
-                </div>
-            </>
-        )
-        
-    }*/
-
     function RFriendList(props) {
         let i = props.i;
 
@@ -107,18 +87,12 @@ function Friend(props) {
                 setRelatedFriend(newData);
                 console.log("break2")
             }
-            //console.log("search text: " + e.target.value)
-            //console.log("relatedfriend: ")
-            //console.log(relatedFriend)
-        
-
+            
     }
 
     function DeleteFriend(UserID){
         //delete friend from the user database
-        //console.log("delete friend "+UserID);
         function DeleteUser(props) {
-            //window.alert("Unfriend with " + UserID);
             console.log(friend[0].ID)
             console.log(UserID);
             setFriend(friend => friend.filter((value, i) => value.ID !== UserID));
@@ -134,7 +108,6 @@ function Friend(props) {
                     current_id: current_id,
                     User_ID: UserID
                 })
-                //body: JSON.stringify([ancd])
             }
             fetch("/friendserver", requestOptions).then(
                 response => response.json()
@@ -149,7 +122,6 @@ function Friend(props) {
             <>
                 <button 
                     title="DeleteFriend" 
-                    //onClick={() => SaveGPA(i, document.getElementById(COURSEGPA[i].COURSE_CODE).value)} >
                     onClick ={() => DeleteUser()}>
                     -
                 </button>
@@ -180,7 +152,6 @@ function Friend(props) {
     function SearchRelatedUser(props) {
 
         function search(props) {
-            //window.alert(document.querySelector("#search-user").value);
             fetch("/friendserver?type=search&username="+document.getElementById("search-user").value+"&current_id="+current_id).then(
                 response => response.json()
             ).then(
@@ -211,11 +182,8 @@ function Friend(props) {
 
     function SendRequest(UserID){
         //send friend request to user
-        //console.log(UserID);
         function SendFriendRequest(props) {
             window.alert("Send friend request to " + relatedUser[UserID].Name);
-            //setFriend(friend => friend.filter((value, i) => i !== UserID));
-            
             //update the server//
             const requestOptions = {
                 method: 'POST',
@@ -225,7 +193,6 @@ function Friend(props) {
                     current_id: current_id,
                     User_ID: relatedUser[UserID].ID
                 })
-                //body: JSON.stringify([ancd])
             }
             fetch("/friendserver", requestOptions).then(
                 response => response.json()
@@ -235,17 +202,12 @@ function Friend(props) {
                 }
             )
         }
-        //const obj = {Name: 'Ann', ID: '0001'};
-        //console.log("comparison: "+friend.filter((e) => e.ID === relatedUser[UserID].ID).length);
-        //console.log(friend[0]);
-        //console.log(obj);
-
+        
         return (
             <>
                 { friend.filter((e) => e.ID === relatedUser[UserID].ID).length === 0 ? 
                 <button 
                     title="SendFriendRequest" 
-                    //onClick={() => SaveGPA(i, document.getElementById(COURSEGPA[i].COURSE_CODE).value)} >
                     onClick ={() => SendFriendRequest()}>
                     +
                 </button> : null
@@ -272,18 +234,14 @@ function Friend(props) {
 
     function AddFriend(UserID){
         //delete friend from the user database
-        //console.log(UserID);
         function AddUser(props) {
             window.alert("You are now friend with "+friendRequest[UserID].Name);
             let obj = friend;
             obj.push(friendRequest[UserID]);
-            //console.log(obj);
             setFriendRequest(friendRequest => friendRequest.filter((value, i) => i !== UserID));
             setFriend(obj);
             obj = relatedFriend;
             console.log("obj"+obj);
-            //obj.push(friendRequest[UserID]);
-            //setRelatedFriend(obj);
             console.log(relatedFriend);
 
             //update the server//
@@ -295,7 +253,6 @@ function Friend(props) {
                     current_id: current_id,
                     User_ID: friendRequest[UserID].ID
                 })
-                //body: JSON.stringify([ancd])
             }
             fetch("/friendserver", requestOptions).then(
                 response => response.json()
@@ -310,33 +267,15 @@ function Friend(props) {
             <>
                 <button 
                     title="AcceptFriendRequest" 
-                    //onClick={() => SaveGPA(i, document.getElementById(COURSEGPA[i].COURSE_CODE).value)} >
                     onClick ={() => AddUser()}>
                     Accept
                 </button>
             </>
         )
     }
-//testing for search//
-/*    function RFriendList(props) {
-        let i = props.i;
 
-        function checkTimetable(id, e) {
-            window.alert("check timetable of user " + id);
-        }
-        return (
-            <>
-            <li class="Friendrecord">
-                <a>{relatedFriend[i].Name}</a>
-                {DeleteFriend (i)}
-            </li>
-            </>
-        )
-    }
-*/
     return (
         <>
-            {/*<FriendColumn />*/}
             <div className="Friend">
                 <div className="MyFriend">
                     <h1>My Friends</h1>
@@ -347,10 +286,7 @@ function Friend(props) {
                     />
                     
                     <ul className="FriendsList">
-                    {/*{friend.map((list, index) => <FriendList i={index} key={index} />)}*/}
-                    {/*<div style={{overflowY: 'scroll', height:'20vh'}}>*/}
                         {relatedFriend.slice(0,15).map((list, index) => <RFriendList i={index} key={index} />)}
-                    {/*</div>*/}
                     </ul>
                 </div>
                 <div className='NewFriend'>

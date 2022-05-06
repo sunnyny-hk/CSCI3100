@@ -1,8 +1,9 @@
 /*
-    Description :
-    Contributer : 
+    Description : Backend of the Search System, 
+                    receive the HTTP Requests from client and connect to the database
+    Contributer : Lau Yu Hin
     Written on : 2022/3/28
-    Last modified : 2022/4/10
+    Last modified : 2022/5/6
 */
 
 const Users = require('../models/userModel')
@@ -11,29 +12,16 @@ const Registered = require('../models/registeredModel')
 const router = require('express').Router()
 const bodyParser = require('body-parser')
 const urlencodeedParser = bodyParser.urlencoded({extended: true})
-//const cors = require("cors");
-//app.use(cors());
 router.use(bodyParser.json())
-
-
-
 var mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://admin:CSCI3100Admin@timetable.tzczu.mongodb.net/timetable_info?retryWrites=true&w=majority')
-
-//const server = app.listen(serverport);
-
-
-
 
 
 router.get("/", async (req, res) => {
     //get data from the db
-    //console.dir(req)
-    //console.dir(req.query)
     if (req.query.keyword!=undefined){
 //get data from db---
         console.log("start----------------")
-        //var key = '/'+req.query.keyword+'/'
         let event = await Course.find(
             {0:{ $regex: req.query.keyword}},
             '0 1 2 3 4 5 6 7 8 9 _id',
@@ -92,8 +80,6 @@ router.get("/", async (req, res) => {
             }
 
         }
-        //testdata[0].new = "hihi"
-        //console.log(testdata[0])
         res.json(data)
     }else {
         res.json("incorrect input format in Search system")

@@ -1,8 +1,13 @@
 /*
-    Description :
-    Contributer : 
-    Written on : 
-    Last modified : 
+    Description : page for URL "/" 
+                  user access this page once they log in to the system
+                  greeting to the user
+                  
+                  uses Timetable.css
+                  
+    Contributer : Lau Yu Hin, Sunny Tang
+    Written on : 2022/3/28
+    Last modified : 2022/5/6
 */
 
 import logo from './logo.svg';

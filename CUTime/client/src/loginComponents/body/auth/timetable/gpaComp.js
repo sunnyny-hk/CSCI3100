@@ -1,8 +1,14 @@
 /*
-    Description :
-    Contributer : 
-    Written on : 
-    Last modified : 
+    Description : page for URL "/gpa" 
+                  user access this page once they click GPA button at home page
+                  require input from user
+                  check the format and send request to backend server by "/gpaserver"
+                  
+                  uses gpaComp.css
+                  
+    Contributer : Lau Yu Hin
+    Written on : 2022/3/28
+    Last modified : 2022/5/6
 */
 
 import { calculateNewValue } from '@testing-library/user-event/dist/utils';
@@ -60,38 +66,19 @@ function GPA(props){
 
     
     const [termGPA, setTermGPA] = useState(0);
-    //let termGPA=0;
     let i =0;
     let creditSum=0;
     let GPASum = 0;
     
     function Calc(){
-        //console.log(termGPA);
-        //setTermGPA('0');
-        //console.log("");
-        //console.log("start termGPA "+termGPA);
         GPASum = 0;
         creditSum = 0;
         COURSEGPA.map((a) =>{
-            //termGPA += a.GPA *3;
-            //setTermGPA(a.GPA *3);
-            //console.log(a.COURSE_NAME);
             GPASum = GPASum + (a.GPA *a.COURSE_CREDIT);
-            //console.log("GPA sum = " + GPASum);
-            
-            //setTermGPA(GPASum);
-            //console.log(a.GPA *3);
-            //console.log("credit sum = "+creditSum);
             creditSum = creditSum + (1*a.COURSE_CREDIT);
         });
-        //console.log("gpa sum = "+GPASum);
         const CGPA = (GPASum /creditSum) || -1
         setTermGPA(CGPA);
-        
-        //console.log("Credit Sum = "+ creditSum);
-
-        //console.log("term GPA = "+ termGPA);
-        //alert(termGPA);
     }
     
     function RequestCalculation(){
@@ -102,9 +89,6 @@ function GPA(props){
         return (
             <>
             <h2>Term GPA = {termGPA < 0.00 ? "/" :termGPA.toFixed(2)}</h2>
-            {//<button title="UpdateGPA" onClick={() => Calc()} >Generate Term GPA</button>
-            //<p>{termGPA.toFixed(2)}</p>
-            }
             </>
         )
     }
@@ -114,13 +98,7 @@ function GPA(props){
     }
     
     function GetGPA(CourseID){
-        //console.log(COURSEGPA);
         let i = CourseID.i;
-        //console.log("b");
-        //const [inputGPA, setInputGPA] = useState('');
-        //const inputGPA = COURSEGPA[2].GPA;
-        //console.log(typeof(inputGPA))
-        //console.log(inputGPA.toFixed(1))
         return(
             <>
             <tr class="GPA-text">
@@ -134,7 +112,6 @@ function GPA(props){
                     type="text"
                     placeholder='A-F'
                     maxLength={2}
-                    //value={COURSEGPA[i].GPA}
                     onKeyPress = { (e) =>{
                         if(e.key ==="Enter"){
                             console.log(GPARex.exec(e.target.value))
@@ -153,22 +130,15 @@ function GPA(props){
             </tr> 
             </>
         )
-        //return ;
     }
     
     
     
     function SaveGPA(CourseID, CourseGPA){
-        //console.log(CourseID);
-        //console.log(CourseGPA);
         const newobj = COURSEGPA[CourseID];
         newobj.GPA = CourseGPA;
-        //setCOURSEGPA[CourseID].GPA(CourseGPA);
-        //const updateByIndex = (CourseGPA, CourseID) => {
             setCOURSEGPA(COURSEGPA => COURSEGPA.map((value, i) => i === CourseID ? newobj: value));
-          //};
-        //console.log(COURSEGPA[CourseID].GPA);
-
+        
         //update the server//
         const requestOptions = {
             method: 'POST',
@@ -178,7 +148,6 @@ function GPA(props){
                 COURSE_ID: COURSEGPA[CourseID]._id,
                 COURSEUpdatedGPA: CourseGPA
             })
-            //body: JSON.stringify([ancd])
         }
         fetch("/gpaserver", requestOptions).then(
             response => response.json()
@@ -224,16 +193,12 @@ function GPA(props){
                 {(typeof COURSEGPA[0] === 'undefined'&&typeof(COURSEGPA) !== 'string'&&message ==="") ? (
                     <p>Loading...</p>
                 ) : (
-                    /*COURSEGPA.map((user,i) =>(
-                        <p key = {i}>{user.COURSE_NAME}</p>
-                    ))*/[]
+                    []
                 )}
                 {(message !=="") ? (
                     <p>{message}</p>
                 ) : (
-                    /*COURSEGPA.map((user,i) =>(
-                        <p key = {i}>{user.COURSE_NAME}</p>
-                    ))*/[]
+                    []
                 )}
                 <RequestCalculation />
             </div>

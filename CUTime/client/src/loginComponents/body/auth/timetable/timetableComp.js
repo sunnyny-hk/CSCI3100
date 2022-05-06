@@ -1,8 +1,14 @@
 /*
-    Description :
-    Contributer : 
-    Written on : 
-    Last modified : 
+    Description : page for URL "/timetable" 
+                  user access this page once they click timetable button at home page
+                  require input from search component
+                  check the format and send request to backend server by "/timetableserver"
+                  
+                  uses timetableComp.css
+                  
+    Contributer : Lau Yu Hin, Sunny Tang, Hui Hiu Kit
+    Written on : 2022/3/28
+    Last modified : 2022/5/6
 */
 
 import React, { useState, forwardRef, useCallback, useEffect } from "react";
@@ -42,7 +48,6 @@ import {useSelector} from 'react-redux';
     visible: true
   }
   
-  
   const CSCI3100 =
   {
     title: "CSCI3100",
@@ -59,8 +64,6 @@ import {useSelector} from 'react-redux';
 function CustomToolbar(){
   return <span></span>
 }
-
-
 
 function Test(props) {
   let testButton = ()=>{
@@ -104,8 +107,6 @@ function TimeTable (props) {
     }
     },[user._id])
 
-
-
     const handleSelectEvent =   useCallback((e) => window.alert(`Name: ${e.name}\nVenue: ${e.venue}\nLecturer: ${e.lecturer}\nClass: ${e.type+" "+e.class}`),[])
     const formats = {
       eventTimeRangeFormat: () => { 
@@ -121,9 +122,6 @@ function TimeTable (props) {
 
       return {style:style}
     }
-
-
-
 
     function readEvent(){
       //TODO: readevent 
@@ -146,7 +144,6 @@ function TimeTable (props) {
 
           }
       )
-      //return(events);
     }
 
     function saveEvent(listEvents){
@@ -161,7 +158,6 @@ function TimeTable (props) {
               current_id: current_id,
               event: allEvents
           })
-          //body: JSON.stringify([ancd])
       }
       fetch("/timetableserver", requestOptions).then(
           response => response.json()
@@ -171,9 +167,6 @@ function TimeTable (props) {
           }
       )
     }
-
-
-
 
     function handleChangeEvent(i,j){
       let lists=listEvents.slice()
@@ -191,17 +184,6 @@ function TimeTable (props) {
 
       setAllEvents(lists.flat().filter(e=>e.visible))
       setListEvents(lists)
-      // let lists=listEvents.slice()
-      // lists.forEach((list,indexi)=>{
-      //   if (index===i){
-      //     if(element.visible===true){
-      //       element.visible= false
-      //     }else{
-      //       element.visible = true
-      //     }
-      //   }
-      // })
-      // setAllEvents(events.filter((e=>e.visible)))
     }
 
     function handleChangeColor(i,j){
@@ -227,85 +209,53 @@ function TimeTable (props) {
       let i=props.i
       let j=props.j
       return (
-
         <>
         <>
         <tr>
-                            <td>{event.name}</td>
-                            <td>{event.venue}</td>
-                            <td>{event.lecturer}</td>
-                            <td>{event.class}</td>
-                            <td>
-                            {event.start.getHours().toString().padStart(2,'0')}:{event.start.getMinutes().toString().padStart(2, '0')}
-                            -{event.end.getHours().toString().padStart(2, '0')}:{event.end.getMinutes().toString().padStart(2, '0')}
-                            </td>
-                            <td><button class="button-71"  onClick={()=>handleChangeEvent(i,j)}>on/off</button></td>
-                            <td><button class="button-71" onClick={()=>handleChangeColor(i,j)}>change</button></td>
-                            </tr>
-                            
-                            </>
-
-                            </>
-          
+          <td>{event.name}</td>
+          <td>{event.venue}</td>
+          <td>{event.lecturer}</td>
+          <td>{event.class}</td>
+          <td>
+          {event.start.getHours().toString().padStart(2,'0')}:{event.start.getMinutes().toString().padStart(2, '0')}
+          -{event.end.getHours().toString().padStart(2, '0')}:{event.end.getMinutes().toString().padStart(2, '0')}
+          </td>
+          <td><button class="button-71"  onClick={()=>handleChangeEvent(i,j)}>on/off</button></td>
+          <td><button class="button-71" onClick={()=>handleChangeColor(i,j)}>change</button></td>
+        </tr>
+        </>
+        </>
       )
     }
 
 
     return (<div className="Timetable">
 
-        {/* <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Course</th>
-                        <th>Detail</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><a href='#' onClick={() => handleAddEvent(CSCI2720)}>CSCI2720</a></td>
-                        <td>3cred Lecturer Time</td>
-                       
-                    </tr>
-                    <tr>
-                        <td><a href='#' onClick={() => handleAddEvent(CSCI3100)}>CSCI3100</a></td>
-                        <td>3cred Lecturer Time</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div> */}
-
         <Calendar localizer={localizer} events={allEvents} defaultView={defaultView} defaultDate={defaultDate} style={{ height: 500, margin: "50px"}} 
         views={{week: true}}  components={{toolbar:CustomToolbar}} min={defaultStartTime} max={defaultEndTime} step={defaultStep} timeslots={2} onSelectEvent={handleSelectEvent} 
         eventPropGetter={event=>eventPropGetter(event)} formats={formats} dayLayoutAlgorithm = 'no-overlap'/>
 
         <div>
-             <table class ="CourseList">
-                            <thead>
-                            <tr class = "thead">
-                            <th>Course Name</th>
-                            <th>Venue</th>
-                            <th>Lecturer</th>
-                            <th>Class</th>
-                            <th>Time</th>
-                            <th>Visible</th>
-                            <th>color</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {listEvents.map((list, index) => < CourseList i={index} key={index} list={list} />)}
-                            </tbody>
-
-                            
-                            
-            </table>
-                          
+            <table class ="CourseList">
+              <thead>
+              <tr class = "thead">
+              <th>Course Name</th>
+              <th>Venue</th>
+              <th>Lecturer</th>
+              <th>Class</th>
+              <th>Time</th>
+              <th>Visible</th>
+              <th>color</th>
+              </tr>
+              </thead>
+              <tbody>
+              {listEvents.map((list, index) => < CourseList i={index} key={index} list={list} />)}
+              </tbody>           
+            </table>           
         </div>
         <button class="button-73" onClick={()=>saveEvent()}>Save to server</button>
     </div>);
 }
-
-
 
 
 export{Test, TimeTable};

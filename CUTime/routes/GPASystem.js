@@ -1,8 +1,9 @@
 /*
-    Description :
-    Contributer : 
+    Description : Backend of the GPA System, 
+                    receive the HTTP Requests from client and connect to the database
+    Contributer : Lau Yu Hin
     Written on : 2022/3/28
-    Last modified : 2022/4/10
+    Last modified : 2022/5/6
 */
 
 const Users = require('../models/userModel')
@@ -11,11 +12,7 @@ const Registered = require('../models/registeredModel')
 const router = require('express').Router()
 const bodyParser = require('body-parser')
 const urlencodeedParser = bodyParser.urlencoded({extended: true})
-//const cors = require("cors");
-//app.use(cors());
 router.use(bodyParser.json())
-
-
 var mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://admin:CSCI3100Admin@timetable.tzczu.mongodb.net/timetable_info?retryWrites=true&w=majority')
 
@@ -24,117 +21,6 @@ mongoose.connect('mongodb+srv://admin:CSCI3100Admin@timetable.tzczu.mongodb.net/
 
 router.get("/",async (req, res) => {
     //get data from the db
-
-/*    let event = await Course.find(
-        {0:{ $regex: "CSCI3100"}},
-        '0',
-        async (err, e) => {
-            if(err){
-                res.set({'Content-Type': 'text/plain'});res.send(`${err}`);
-                return;
-            } else{
-                return e;
-            }
-        }
-    ).clone();
-    
-    if(event.length != 0){
-        console.log(event);
-        console.log("got in la")
-    }
-
-    let testing = await User.find(
-        {userName: "Jacky"},
-        'userName course _id',
-        async (err, e) => {
-            if(err){
-                res.set({'Content-Type': 'text/plain'});res.send(`${err}`);
-                return;
-            } else{
-                return e;
-            }
-        }
-    ).clone();
-    
-    if(testing.length != 0){
-        console.log(testing);
-        console.log("got in testing la")
-    }
-
-    console.log(testing[0]._id)
-    var ObjectId = require('mongoose').Types.ObjectId; 
-    var query = { campaign_id: new ObjectId(testing[0]._id) };
-
-    let testing1 = await Registered.find(
-        {user: mongoose.Types.ObjectId(testing[0]._id)},
-        'user course _id GPA',
-        async (err, e) => {
-            if(err){
-                res.set({'Content-Type': 'text/plain'});res.send(`${err}`);
-                return;
-            } else{
-                return e;
-            }
-        }
-    ).clone();
-    
-    if(testing1.length != 0){
-        console.log(testing1);
-        console.log("got in testing1 la")
-    }
-
-    console.log(testing1[0].course)
-
-    let testing2 = await Course.find(
-        {_id: mongoose.Types.ObjectId(testing1[0].course)},
-        '0 1 _id',
-        async (err, e) => {
-            if(err){
-                res.set({'Content-Type': 'text/plain'});res.send(`${err}`);
-                return;
-            } else{
-                return e;
-            }
-        }
-    ).clone();
-    
-    if(testing2.length != 0){
-        console.log(testing2);
-        console.log("got in testing2 la")
-    }*/
-
-//create a record in the db schema//
-    /*Registered.create({
-        course: mongoose.Types.ObjectId("6251d908ead4bb42d6fe5028"),
-        user: mongoose.Types.ObjectId(user_id),
-        GPA: 3.0
-    }, async (err, e) => {
-        if (err) {res.set({'Content-Type': 'text/plain'}); res.send(`${err}`);}
-        else {
-            //res.status(201);
-            //let s = await getEvent(eventRef, res);
-            //res.set({'Content-Type': 'text/plain'});
-            //res.send(s['message']);
-        }
-    });*/
-
-//delete a record//
-    /*Registered.findOneAndDelete(
-        {user: mongoose.Types.ObjectId(user_id)},
-        // 'eventId name loc quota',
-        (err, e) => {
-            if (err || e == null) {
-                //res.status(404);
-                //res.set({'Content-Type': 'text/plain'});res.send("404 not found.");
-                console.log(err)
-            }
-            else{
-                //res.sendStatus(204);
-                console.log("success")
-            }
-        }
-    );*/
-
     async function addtodata(register, e, index){
         const obj = {
             COURSE_ID: parseInt(e['1']),
@@ -157,22 +43,11 @@ router.get("/",async (req, res) => {
             register[i].course,
             async(err, e) => {
                 if(err){
-                    /*res.json("No course for current_id in GPA system")
-                    res.set({'Content-Type': 'text/plain'});res.send(`${err}`);
-                    return;*/
                     console.log("error------------------")
                 } else{
-                    //console.log(e)
-                    //console.log("looping:"+index)
-                    let error = await addtodata(register, e, index);
+                   let error = await addtodata(register, e, index);
                     console.log("after getting the obj")
-                    //console.log(obj)
-                    //console.log("looping:")
-                    //console.dir(data);
                     console.log("index, i, length"+index+i+register.length);
-
-                   
-
                 }
             }
             ).clone();
@@ -216,24 +91,18 @@ router.get("/",async (req, res) => {
         if(register.length == 0){
             res.json("Please add course to account first")
         }else{
-            //res.json(await getcourseinfo(register, data))
-            //console.log( "data ="+data)
-
-            //var resolvedProm = await getcourseinfo(register, data)
             console.log("starting of the loop")
             var i=0;
             while(i<register.length){
             var thenProm = await getcourseinfo(register, data, i)
             i=i+1;
             console.log("i update")
-            //console.log(event)
             }
             console.log("send to client")
             res.json(data);
         }
         
         if(register.length != 0){ // debugging
-            //console.log(register);
             console.log("got in testing1 la")
         }
 
@@ -244,7 +113,6 @@ router.get("/",async (req, res) => {
     }
     console.log(req.query.current_id)
     console.log(req.query)
-    //res.json(data);
 })
 
 router.post("/", urlencodeedParser, async(req, res) => {

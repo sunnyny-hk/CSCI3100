@@ -1,8 +1,14 @@
 /*
-    Description :
-    Contributer : 
-    Written on : 
-    Last modified : 
+    Description : part of page for URL "/timetable" 
+                  user access this part once they click Timetable button at home page
+                  require input from user
+                  check the format and send request to backend server by "/searchserver"
+                  
+                  uses searchComp.css
+                  
+    Contributer : Lau Yu Hin
+    Written on : 2022/3/28
+    Last modified : 2022/5/6
 */
 
 import { TimeTable } from "./timetableComp";
@@ -66,16 +72,6 @@ function Search(props) {
 
     const [data,setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
-    /*const filteredData = data.filter(
-        info =>{
-            console.log(searchField)
-            return (
-                info.COURSE_CODE.toLowerCase().includes(searchField.toLowerCase())||
-                //info.COURSE_ID.includes(searchField)||
-                info.COURSE_NAME.toLower.toLowerCase().includes(searchField.toLowerCase())
-            )
-        }
-    )*/
 
     function SearchedItem(props) {
         let i = props.i;
@@ -84,7 +80,6 @@ function Search(props) {
             <>
             {data[i].SHOW ?
             <tr onClick={()=>{
-                //window.alert("add "+data[i].COURSE_CODE+ " to the timetable");
                 var index = i;
                 var objs=[];
                 while(data[index]!= undefined&&data[index].COURSE_CODE === data[i].COURSE_CODE){
@@ -129,7 +124,6 @@ function Search(props) {
     function SearchBar(props) {
 
         function searchCourse(props) {
-            //window.alert(document.querySelector("#search-text").value);
             fetch("/searchserver?keyword="+document.getElementById("search-text").value).then(
                 response => response.json()
             ).then(
@@ -161,8 +155,6 @@ function Search(props) {
             <div className = "Search">
                 <h2>Search Course in Term 2</h2>
                 <SearchBar />
-
-                {/* SearchList */}
                 <div className = "CourseTable">
                     {data[0]!==undefined ?
                     <table>
@@ -180,7 +172,6 @@ function Search(props) {
                         
                         
                         <tbody>
-                            {/*console.log(data)*/}
                             {data.map((result, index) => <SearchedItem i={index} key={index} />)}
                         </tbody>
                     </table>

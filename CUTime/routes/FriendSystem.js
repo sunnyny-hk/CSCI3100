@@ -1,8 +1,9 @@
 /*
-    Description :
-    Contributer : 
+    Description : Backend of the Friend System, 
+                    receive the HTTP Requests from client and connect to the database
+    Contributer : Lau Yu Hin, Wong Man Chun
     Written on : 2022/3/28
-    Last modified : 2022/4/10
+    Last modified : 2022/5/6
 */
 
 const User = require('../models/userModel')
@@ -11,21 +12,13 @@ const Registered = require('../models/registeredModel')
 const router = require('express').Router()
 const bodyParser = require('body-parser')
 const urlencodeedParser = bodyParser.urlencoded({extended: true})
-//const cors = require("cors");
-//app.use(cors());
 router.use(bodyParser.json())
-
-
 var mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://admin:CSCI3100Admin@timetable.tzczu.mongodb.net/timetable_info?retryWrites=true&w=majority')
 
 
 
  
- 
-//const user_id = '6253204dafb370d99ec6e3e4';
-//const user_id = '625302342921018308089e68';
-
 async function getfriendrequest(list_received,request_list){
 for (const i in list_received) {
     await User.find(
@@ -33,7 +26,6 @@ for (const i in list_received) {
         (err, e) => {
             if (err) res.send(err)
             else {
-                //console.log(e)
                 if(e.length !=0){
                     let obj = 
                     { 
@@ -44,7 +36,6 @@ for (const i in list_received) {
                     request_list.push(obj)
                 }
             }
-            // else return e
             console.log(request_list)
         } 
     ).clone()
@@ -58,7 +49,6 @@ return new Promise(resolve => {
 router.get("/",async(req, res) => {
     //get data from the db
     if(req.query.current_id != null&&req.query.type == 'start'){
-        //res.json();
         let name_list = []
         let user_id = req.query.current_id;
         let counter = 0
@@ -91,7 +81,6 @@ router.get("/",async(req, res) => {
                             name_list.push(obj)
                         }
                     }
-                    // else return e
                 }
             ).clone()
         }
@@ -109,8 +98,6 @@ router.get("/",async(req, res) => {
         
         let list_received = received_info[0].received
         console.log(list_received)
-        //console.log(received_info)
- 
         await getfriendrequest(list_received,request_list);
         console.log(request_list)
         res.json({friend: name_list,
@@ -151,19 +138,7 @@ router.get("/",async(req, res) => {
     console.log(req.query.current_id)
     console.log(req.query)
 })
-/*
-router.get("/",(req, res) => {
-    //get data from the db
-    console.log(req.query)
-    if(req.query.type == "search"){
-        
-    }else{
-        res.json("incorrect input format for userid in Friend system")
-    }
-    console.log(req.query.userid)
-    console.log(req.query)
-})
-*/
+
 router.post("/", urlencodeedParser, async(req, res) => {
     console.log("hi, is post ")
     console.dir(req.body)
