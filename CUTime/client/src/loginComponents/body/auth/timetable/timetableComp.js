@@ -32,11 +32,11 @@ import {useSelector} from 'react-redux';
   const defaultDate = new Date("2022-09-05")
   const defaultStep = 30
   
-
+   //Deafult background color
   const color = ['AntiqueWhite','Aqua','lavender','CadetBlue','chartreuse','HotPink']
-  //TODO: Import data from database
   const events = []
 
+  //Test course for internal use
   const CSCI2720 =
   {
     title: "CSCI2720",
@@ -67,6 +67,7 @@ function CustomToolbar(){
   return <span></span>
 }
 
+//test function for internal use
 function Test(props) {
   let testButton = ()=>{
     eventBus.dispatch('testing',[CSCI3100,CSCI2720])
@@ -89,7 +90,8 @@ function TimeTable (props) {
 
     const {user, isLogged} = auth
     const current_id = user._id;
-
+    
+    //event listener for adding course
     useEffect(()=>{
       if(user._id){
       readEvent();
@@ -125,8 +127,8 @@ function TimeTable (props) {
       return {style:style}
     }
 
+    //read event from timetable server
     function readEvent(){
-      //TODO: readevent 
       fetch("/timetableserver?current_id="+current_id).then(
           response => response.json()
       ).then(
@@ -149,7 +151,6 @@ function TimeTable (props) {
     }
 
     function saveEvent(listEvents){
-      //TODO: saveEvent
       //update the server//
       console.log(allEvents)
       const requestOptions = {
@@ -170,6 +171,7 @@ function TimeTable (props) {
       )
     }
 
+    // change tutorial preference and delete course
     function handleChangeEvent(i,j){
       let lists=listEvents.slice()
       let selectedlist=lists[i]
@@ -206,6 +208,7 @@ function TimeTable (props) {
  
       }
 
+    //Basic unit of the timetable event
     function CourseCell(props){
       let event=props.event;
       let i=props.i
@@ -229,10 +232,11 @@ function TimeTable (props) {
         </>
       )
     }
-
+    
+    //Setting of React-big-calendar
 
     return (<div className="Timetable">
-
+    
         <Calendar localizer={localizer} events={allEvents} defaultView={defaultView} defaultDate={defaultDate} style={{ height: 500, margin: "50px"}} 
         views={{week: true}}  components={{toolbar:CustomToolbar}} min={defaultStartTime} max={defaultEndTime} step={defaultStep} timeslots={2} onSelectEvent={handleSelectEvent} 
         eventPropGetter={event=>eventPropGetter(event)} formats={formats} dayLayoutAlgorithm = 'no-overlap'/>
